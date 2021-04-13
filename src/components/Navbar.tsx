@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
   return (
     <div>
-      <Link to="/">Landing</Link>
-      <Link to="/dashboard">Dashboard</Link>
+      <NavLink exact activeClassName="active" to="/">Landing</NavLink>
+      <NavLink activeClassName="active" to="/dashboard">Dashboard</NavLink>
     </div>
   );
 };
