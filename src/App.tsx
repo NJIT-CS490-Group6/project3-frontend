@@ -9,9 +9,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <header>
-        <Navbar />
-      </header>
+      <Navbar />
       <main>
         <Route exact path="/">
           <LandingPage />
