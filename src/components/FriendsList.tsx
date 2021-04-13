@@ -8,19 +8,19 @@ const FriendsList = () => {
 
   return (
     <ListGroup defaultActiveKey="#link1">
-      <ListGroup.Item>
+      <ListGroup.Item action onClick={onClickFriend}>
         Cras Odio
       </ListGroup.Item>
-      <ListGroup.Item>
+      <ListGroup.Item action onClick={onClickFriend}>
         Dapibus Facilisis
         </ListGroup.Item>
-      <ListGroup.Item>
+      <ListGroup.Item action onClick={onClickFriend}>
         Morbi Leo
         </ListGroup.Item>
-      <ListGroup.Item>
+      <ListGroup.Item action onClick={onClickFriend}>
         Porta Consectetur
       </ListGroup.Item>
-      <ListGroup.Item onClick={onClickFriend}>
+      <ListGroup.Item action onClick={onClickFriend}>
         Vestibulum Eros
       </ListGroup.Item>
     </ListGroup>
