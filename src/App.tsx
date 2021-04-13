@@ -4,7 +4,7 @@ import LandingPage from './pages/LandingPage';
 import Dashboard from './pages/Dashboard';
 import Navbar from './components/Navbar';
 
-import './App.css';
+import './styles/App.css';
 
 function App() {
   return (
