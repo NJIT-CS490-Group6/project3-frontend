@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 import App from './App';
 
-test('full app rendering/navigating', async () => {
+test('app rendering/navigating', () => {
   const history = createMemoryHistory()
   render(
     <Router history={history}>
