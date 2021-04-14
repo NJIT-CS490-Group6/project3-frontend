@@ -1,4 +1,5 @@
-import ListGroup from 'react-bootstrap/ListGroup'
+import FriendsToolbar from './FriendsToolbar';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 const FriendsList = () => {
 
@@ -16,6 +17,8 @@ const FriendsList = () => {
   }
 
   return (
+    <div>
+    <FriendsToolbar></FriendsToolbar>
     <ListGroup defaultActiveKey="#link1">
       <ListGroup.Item action onClick={onClickFriend}>
         Cras Odio
@@ -33,6 +36,7 @@ const FriendsList = () => {
         Vestibulum Eros
       </ListGroup.Item>
     </ListGroup>
+    </div>
   );
 }
 

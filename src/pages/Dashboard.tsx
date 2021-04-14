@@ -9,10 +9,10 @@ const Dashboard = () => {
   return (
     <Container fluid>
       <Row>
-        <Col>
+        <Col xs={6} md={5} lg={4} xl={3}>
           <FriendsList></FriendsList>
         </Col>
-        <Col xs={9}>
+        <Col xs={6} md={7} lg={8} xl={9}>
           <ChatRoom></ChatRoom>
         </Col>
       </Row>
