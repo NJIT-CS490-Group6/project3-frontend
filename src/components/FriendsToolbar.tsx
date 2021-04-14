@@ -4,15 +4,19 @@ import FormControl from 'react-bootstrap/FormControl';
 
 
 const FriendsToolbar = () => {
+  const onAddFriend = () => {
+    alert('Send Friend Request');
+  }
+
   return (
     <InputGroup className="mb-3">
       <FormControl
-        placeholder="Recipient's username"
-        aria-label="Recipient's username"
+        placeholder="Enter Friend's Username"
+        aria-label="Enter Friend's Username"
         aria-describedby="basic-addon2"
       />
       <InputGroup.Append>
-        <Button variant="outline-secondary">Button</Button>
+        <Button variant="outline-secondary" onClick={onAddFriend}>Add</Button>
       </InputGroup.Append>
     </InputGroup>
   );
