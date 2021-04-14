@@ -2,14 +2,14 @@ import { Route } from 'react-router-dom';
 
 import LandingPage from './pages/LandingPage';
 import Dashboard from './pages/Dashboard';
-import Navbar from './components/Navbar';
+import MainNavbar from './components/MainNavbar';
 
 import './styles/App.css';
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      <MainNavbar />
       <main>
         <Route exact path="/">
           <LandingPage />
