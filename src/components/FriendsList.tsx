@@ -61,7 +61,10 @@ const FriendsList = () => {
   const onClickFriend = () => {
     alert("Pull up friend profile");
   }
-  
+
+  const onAddFriend = (username: any) => {
+    alert('Send Friend Request to '+ username.current.value);
+  }
   
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>;
@@ -83,7 +86,7 @@ const FriendsList = () => {
 
   return (
     <div>
-      <FriendsToolbar></FriendsToolbar>
+      <FriendsToolbar clickHandler={onAddFriend}></FriendsToolbar>
       {!isLoading && <ListGroup defaultActiveKey="#link1">
         {friends.map(friend => (
           <ListGroup.Item 
