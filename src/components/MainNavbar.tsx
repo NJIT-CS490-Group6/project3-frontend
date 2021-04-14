@@ -7,8 +7,8 @@ const MainNavbar = () => {
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand href="/">Lets Hangout!</Navbar.Brand>
       <Nav className="mr-auto">
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/dashboard">Dashboard</NavLink>
+        <NavLink to="/" activeClassName="active">Home</NavLink>
+        <NavLink to="/dashboard" activeClassName="active">Dashboard</NavLink>
       </Nav>
       <Navbar.Collapse className="justify-content-end">
         <Navbar.Text>
