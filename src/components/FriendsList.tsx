@@ -2,6 +2,15 @@ import ListGroup from 'react-bootstrap/ListGroup'
 
 const FriendsList = () => {
 
+  // const fetchFriendsHandler = () => {
+    // fetch('https://njit-cs490-group6.github.io/api/v1/friends')
+    // .then(response => {
+    //   return response.json();
+    // }).then(data => {
+    //   console.log(data.results);
+    // });
+  // }
+  // fetchFriendsHandler();
   const onClickFriend = () => {
     alert("Pull up friend profile");
   }
