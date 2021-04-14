@@ -61,11 +61,13 @@ const FriendsList = () => {
   const onClickFriend = () => {
     alert("Pull up friend profile");
   }
-
+  
+  
   useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
     const fetchFriendsHandler = () => {
       setIsLoading(true);
-      setTimeout(() => {
+      timer = setTimeout(() => {
         setIsLoading(false);
         setFriends(allFriends);
       }, 1000);
@@ -74,7 +76,10 @@ const FriendsList = () => {
       fetchFriendsHandler();
       hasFetchedData.current = true;
     }
-  }, [isLoading]);
+    return () => {
+      clearTimeout(timer)
+    }
+  }, []);
 
   return (
     <div>
