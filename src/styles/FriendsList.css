@@ -1,0 +1,23 @@
+#available-square {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #c3e6cb;
+  margin-right: 1rem;
+}
+#busy-square {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #f5c6cb;
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+#offline-square {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #c6c8ca;
+  margin-right: 1rem;
+  margin-left: 1rem;
+}

@@ -3,6 +3,8 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { useState, useEffect, useRef } from 'react';
 import { Friend } from '../models/friend.model';
 
+import '../styles/FriendsList.css';
+
 const allFriends: Friend[] = [
   new Friend(
     "f48c1eca-295d-4603-8433-bbfa645ce92a",
@@ -99,6 +101,11 @@ const FriendsList = () => {
   return (
     <div>
       <FriendsToolbar clickHandler={onAddFriend}></FriendsToolbar>
+      <div className="legend">
+        <span><div id="available-square"></div>Available</span>
+        <span><div id="busy-square"></div>Busy</span>
+        <span><div id="offline-square"></div>Offline</span>
+      </div>
       {!isLoading && <ListGroup defaultActiveKey="#link1">
         {friends.map(friend => (
           <ListGroup.Item 
