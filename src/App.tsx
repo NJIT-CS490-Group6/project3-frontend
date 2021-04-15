@@ -1,9 +1,10 @@
+import React from 'react'
 import { Route, Switch } from 'react-router-dom';
 
 import LandingPage from './pages/LandingPage';
 import Dashboard from './pages/Dashboard';
 import ErrorPage from './pages/ErrorPage'
-import MainNavbar from './components/MainNavbar';
+import MainNavbar from './components/MainNavbar.tsx';
 
 import './styles/App.css';
 
@@ -12,6 +13,7 @@ function App() {
     <div className="App">
       <Switch>
         <Route exact path="/">
+          <MainNavbar />
           <LandingPage />
         </Route>
         <Route path="/dashboard">
