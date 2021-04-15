@@ -1,23 +1,27 @@
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import LandingPage from './pages/LandingPage';
 import Dashboard from './pages/Dashboard';
-import Navbar from './components/Navbar';
+import ErrorPage from './pages/ErrorPage'
+import MainNavbar from './components/MainNavbar';
 
 import './styles/App.css';
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
-      <main>
+      <Switch>
         <Route exact path="/">
           <LandingPage />
         </Route>
         <Route path="/dashboard">
+          <MainNavbar />
           <Dashboard />
         </Route>
-      </main>
+        <Route path="**">
+          <ErrorPage />
+        </Route>
+      </Switch>
     </div>
   );
 }
