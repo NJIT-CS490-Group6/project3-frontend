@@ -93,7 +93,7 @@ const FriendsList = () => {
             action 
             onClick={onClickFriend}
             key={friend.id}>
-              {friend.name}
+              {friend.username}
           </ListGroup.Item>
         ))}
       </ListGroup>}
