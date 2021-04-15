@@ -1,0 +1,9 @@
+.active {
+    margin-left: 10px;
+    color: gray;
+}
+
+.active:hover {
+    color: white;
+    text-decoration: none;
+}
