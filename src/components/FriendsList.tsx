@@ -65,6 +65,18 @@ const FriendsList = () => {
   const onAddFriend = (username: any) => {
     alert('Send Friend Request to '+ username.current.value);
   }
+
+  const getVariant: any = (status: string) => {
+    let result = '';
+    if (status === 'available') {
+      result = 'success';
+    } else if (status === 'busy') {
+      result = 'danger';
+    } else if (status === 'offline') {
+      result = 'dark';
+    }
+    return result;
+  } 
   
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>;
@@ -91,6 +103,7 @@ const FriendsList = () => {
         {friends.map(friend => (
           <ListGroup.Item 
             action 
+            variant={getVariant(friend.status.status)}
             onClick={onClickFriend}
             key={friend.id}>
               {friend.username}
