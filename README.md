@@ -25,3 +25,5 @@ This code is purely frontend code used in creating the app.
 * no-useless-constructor
 * no-unused-vars
 * no-empty-function
+* no-alert
+* no-console

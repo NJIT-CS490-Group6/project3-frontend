@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import '../styles/Dashboard.css';
 import FriendsList from '../components/FriendsList';
-import ChatRoom from '../components/ChatRoom';
+import ChatRoom2 from '../components/ChatRoom_2';
 
 const Dashboard = () => (
     <Container fluid>
@@ -13,7 +13,7 @@ const Dashboard = () => (
           <FriendsList />
         </Col>
         <Col xs={6} md={7} lg={8} xl={9}>
-          <ChatRoom />
+          <ChatRoom2 />
         </Col>
       </Row>
     </Container>
