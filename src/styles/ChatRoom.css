@@ -1,0 +1,30 @@
+.msg_cotainer{
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 10px;
+  border-radius: 25px;
+  background-color: #82ccdd;
+  padding: 10px;
+  position: relative;
+}
+.msg_cotainer_send{
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 10px;
+  border-radius: 25px;
+  background-color: #78e08f;
+  padding: 10px;
+  position: relative;
+}
+.msg_time{
+  position: absolute;
+  left: 15px;
+  bottom: -15px;
+  font-size: 10px;
+}
+.msg_time_send{
+  position: absolute;
+  right: 15px;
+  bottom: -15px;
+  font-size: 10px;
+}
