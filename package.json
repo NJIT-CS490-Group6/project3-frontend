@@ -46,7 +46,13 @@
       "react-hooks/exhaustive-deps": "off",
       "react/jsx-filename-extension": "off",
       "no-use-before-define": "off",
-      "@typescript-eslint/no-use-before-define": ["error"]
+      "@typescript-eslint/no-use-before-define": ["error"],
+      "import/no-unresolved" : "off",
+      "import/extensions" : "off",
+      "import/prefer-default-export": "off",
+      "no-useless-constructor": "off",
+      "no-unused-vars": "off",
+      "no-empty-function": "off"
     }
   },
   "browserslist": {

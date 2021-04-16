@@ -1,7 +1,7 @@
-import FriendsToolbar from './FriendsToolbar';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Friend } from '../models/friend.model';
+import FriendsToolbar from './FriendsToolbar';
 
 import '../styles/FriendsList.css';
 
@@ -65,7 +65,7 @@ const FriendsList = () => {
   }
 
   const onAddFriend = (username: any) => {
-    alert('Send Friend Request to '+ username.current.value);
+    alert(`Send Friend Request to , ${username.current.value}`);
   }
 
   const getVariant: any = (status: string) => {
@@ -100,11 +100,11 @@ const FriendsList = () => {
 
   return (
     <div>
-      <FriendsToolbar clickHandler={onAddFriend}></FriendsToolbar>
+      <FriendsToolbar clickHandler={onAddFriend} />
       <div className="legend">
-        <span><div id="available-square"></div>Available</span>
-        <span><div id="busy-square"></div>Busy</span>
-        <span><div id="offline-square"></div>Offline</span>
+        <span><div id="available-square" />Available</span>
+        <span><div id="busy-square" />Busy</span>
+        <span><div id="offline-square" />Offline</span>
       </div>
       {!isLoading && <ListGroup defaultActiveKey="#link1">
         {friends.map(friend => (

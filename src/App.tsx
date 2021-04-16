@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import Dashboard from './pages/Dashboard';
 import ErrorPage from './pages/ErrorPage'
-import MainNavbar from './components/MainNavbar.tsx';
+import MainNavbar from './components/MainNavbar';
 
 import './styles/App.css';
 

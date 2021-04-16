@@ -1,8 +1,9 @@
-const ChatRoom = () => {
+import React from 'react'
 
-  return (
+const ChatRoom = () => (
+
     <h1>The Chat Room Component</h1>
-  );
-}
+  
+);
 
 export default ChatRoom;
