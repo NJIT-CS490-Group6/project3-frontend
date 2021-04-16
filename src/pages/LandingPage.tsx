@@ -1,3 +1,4 @@
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -21,7 +22,7 @@ const LandingPage = () => {
     <Container fluid>
       <Row className="pb-5">
         <Col xs={{offset: 2}}>
-          <Image fluid src={logo} className="mt-5"></Image>
+          <Image fluid src={logo} className="mt-5" />
         </Col>
         <Col className="text-center mt-5">
           <h1 className="mt-5 display-1 text-center">Hangout</h1>
@@ -41,18 +42,16 @@ const LandingPage = () => {
               Register
           </Button>
         </Col>
-        <Col xs={2}>
-        </Col>
+        <Col xs={2} />
       </Row>
       <Row className="pb-5 black-container">
         <Col xs={{offset: 2}}>
           <h1 className="mt-5 display-1 text-center">What is Hangout?</h1>
         </Col>
         <Col className="text-center mt-5 about-app">
-          <p>Hangout is a way for you to know when your friends are available to do something. When you're ready to hangout, the application will allow you to join a chatroom with others who are also available to hangout.</p>
+          <p>Hangout is a way for you to know when your friends are available to do something. When you&apos;re ready to hangout, the application will allow you to join a chatroom with others who are also available to hangout.</p>
         </Col>
-        <Col xs={2}>
-        </Col>
+        <Col xs={2} />
       </Row>
       <Row className="">
         <Col xs={{offset: 2}} className="text-center mt-5">
@@ -74,8 +73,7 @@ const LandingPage = () => {
             Creators
           </h1>
         </Col>
-        <Col xs={2}>
-        </Col>
+        <Col xs={2} />
       </Row>
     </Container>
   );
