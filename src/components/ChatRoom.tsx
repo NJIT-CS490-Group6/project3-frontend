@@ -14,14 +14,14 @@ const ChatRoom = () => {
       </Card.Header>
       <Card.Body>
         <div className="d-flex justify-content-start mb-4">
-          <div className="msg_cotainer">
+          <div className="msg_container">
             Hi, how are you Mike?
             <span className="msg_time">8:40 AM, Today</span>
           </div>
         </div>
         <div className="d-flex justify-content-end mb-4">
-          <div className="msg_cotainer_send">
-            Hi Jerry i am good thanks. how about you?
+          <div className="msg_container_send">
+            Hi Jerry I am good thanks. how about you?
             <span className="msg_time_send">8:55 AM, Today</span>
           </div>
         </div>
