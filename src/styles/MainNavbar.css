@@ -1,9 +1,16 @@
-.active {
+.navlink {
     margin-left: 10px;
-    color: gray;
+    color: lightgray;
 }
 
-.active:hover {
+.navlink:hover {
     color: white;
     text-decoration: none;
+    transform: translateY(-2px);
 }
+
+.active {
+    color: white;
+    border-bottom: 3px solid white;
+}
+

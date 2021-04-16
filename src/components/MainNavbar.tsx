@@ -9,10 +9,10 @@ const MainNavbar = () => (
   <Navbar bg="dark" variant="dark">
     <Navbar.Brand href="/">Lets Hangout!</Navbar.Brand>
     <Nav className="mr-auto">
-      <NavLink to="/" activeClassName="active">
+      <NavLink to="/" className="navlink" exact activeClassName="active">
         Home
       </NavLink>
-      <NavLink to="/dashboard" activeClassName="active">
+      <NavLink to="/dashboard" className="navlink" activeClassName="active">
         Dashboard
       </NavLink>
     </Nav>
