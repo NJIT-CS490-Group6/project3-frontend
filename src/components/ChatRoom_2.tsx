@@ -2,15 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import io from "socket.io-client";
 
+const [yourID, setYourID] = useState();
+const [messages, setMessages] = useState([]);
+const [message, setMessage] = useState("");
 
-  const [yourID, setYourID] = useState();
-  const [messages, setMessages] = useState([]);
-  const [message, setMessage] = useState("");
+const socketRef = useRef();
 
-  const socketRef = useRef();
-
-  useEffect(() => {
-    socketRef.current = io.connect('/');
+useEffect(() => {
+   socketRef.current = io.connect('/');
 
     socketRef.current.on("your id", id => {
       setYourID(id);
