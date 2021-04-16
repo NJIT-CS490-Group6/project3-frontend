@@ -1,4 +1,3 @@
-import Jumbotron from 'react-bootstrap/Jumbotron';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -9,6 +8,15 @@ import logo from '../assets/logo.png';
 import '../styles/LandingPage.css';
 
 const LandingPage = () => {
+
+  const goToLogin = () => {
+    window.open('https://cloud.lucasantarella.com/login');
+  }
+
+  const goToRegistration = () => {
+    window.open('https://cloud.lucasantarella.com/register');
+  }
+
   return (
     <Container fluid>
       <Row className="pb-5">
@@ -18,8 +26,20 @@ const LandingPage = () => {
         <Col className="text-center mt-5">
           <h1 className="mt-5 display-1 text-center">Hangout</h1>
           <h1 className="display-4 text-center">By Group 6</h1>
-          <Button size="lg" className="mt-5 mr-5">Login</Button>
-          <Button size="lg" className="mt-5">Register</Button>
+          <Button
+            variant="warning"
+            size="lg"
+            onClick={goToLogin}
+            className="mt-5 mr-5">
+              Login
+          </Button>
+          <Button
+            variant="info"
+            size="lg"
+            onClick={goToRegistration}
+            className="mt-5">
+              Register
+          </Button>
         </Col>
         <Col xs={2}>
         </Col>
