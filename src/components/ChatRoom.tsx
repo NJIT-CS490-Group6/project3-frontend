@@ -6,7 +6,7 @@ import '../styles/ChatRoom.css';
 const ChatRoom = () => {
   console.log()
   return (
-    <Card>
+    <Card className="chat-room-container">
       <Card.Header>
         <h3 className="display-5 text-center">
           Chat with Mike123 and Jerry123

@@ -28,3 +28,7 @@
   bottom: -15px;
   font-size: 10px;
 }
+
+.chat-room-container {
+  min-height: 80vh;
+}
