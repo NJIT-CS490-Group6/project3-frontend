@@ -5,6 +5,51 @@ import "../styles/ChatRoom.css";
 
 const ChatRoom = () => {
   console.log();
+  
+  /*
+  
+  const [yourID, setYourID] = useState();
+  const [messages, setMessages] = useState<{body: string, id: any}[]>([]);
+  const [message, setMessage] = useState("");
+
+  const socketRef = useRef(io());
+
+  useEffect(() => {
+  
+    // socketRef.current = io.connect('/');
+
+    socketRef.current.on("your id", id => {
+      setYourID(id);
+    })
+
+    socketRef.current.on("message", (msg: any) => {
+      console.log("here");
+      receivedMessage(msg);
+    })
+  }, []);
+
+    function receivedMessage(msg: any) {
+      setMessages(oldMsgs => [...oldMsgs, msg]);
+    }
+
+    function sendMessage(e: any) {
+      e.preventDefault();
+      const messageObject = {
+        body: message,
+        id: yourID,
+      };
+      setMessage("");
+      socketRef.current.emit("send message", messageObject);
+      setMessages(oldMsgs => [...oldMsgs, messageObject]);
+    }
+
+    function handleChange(e: any) {
+      setMessage(e.target.value);
+    }
+    
+    */
+  
+  
   return (
     <Card className="chat-room-container">
       <Card.Header>
