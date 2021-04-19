@@ -1,16 +1,12 @@
 # Frontend
-test
+
 ## Description
 
 This code is purely frontend code used in creating the app.
 
 ## Stack
 
-* React
-
-## User Stories
-
-* TBD
+* React, TypeScript, Bootstrap
 
 ## Linting
 
@@ -20,7 +16,9 @@ This code is purely frontend code used in creating the app.
 * react-hooks/exhaustive-deps is off for the same reasons we were told to turn it off in project 2
 * react/jsx-filename-extension is off for the same reasons we were told to turn it off in project 2
 * import/nounresolved and import/extensions turned off because they directly conflict with a typescript error for not putting .tsx or .ts as at the end of imports
+
 ### FOLLOWING ARE TEMPORARY DISABLED FOR TESTING PURPOSES:
+
 * import/prefer-default-export
 * no-useless-constructor
 * no-unused-vars
