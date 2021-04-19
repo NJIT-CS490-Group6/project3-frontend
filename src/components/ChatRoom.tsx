@@ -1,10 +1,10 @@
-import React from 'react';
-import Card from 'react-bootstrap/Card';
+import React from "react";
+import Card from "react-bootstrap/Card";
 
-import '../styles/ChatRoom.css';
+import "../styles/ChatRoom.css";
 
 const ChatRoom = () => {
-  console.log()
+  console.log();
   return (
     <Card className="chat-room-container">
       <Card.Header>
@@ -28,6 +28,6 @@ const ChatRoom = () => {
       </Card.Body>
     </Card>
   );
-}
+};
 
 export default ChatRoom;

@@ -1,4 +1,4 @@
-import { Friend } from './friend.model';
+import { Friend } from "./friend.model";
 
 export class Thread {
   constructor(
@@ -8,11 +8,11 @@ export class Thread {
     public name: string,
     public participants: Friend[],
     public lastMessage: {
-      id: string,
-      seq: number,
-      timestamp: number,
-      from: string,
-      content: string
+      id: string;
+      seq: number;
+      timestamp: number;
+      from: string;
+      content: string;
     }
   ) {}
 }

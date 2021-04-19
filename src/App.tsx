@@ -1,12 +1,12 @@
-import React from 'react'
-import { Route, Switch } from 'react-router-dom';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 
-import LandingPage from './pages/LandingPage';
-import Dashboard from './pages/Dashboard';
-import ErrorPage from './pages/ErrorPage'
-import MainNavbar from './components/MainNavbar';
+import LandingPage from "./pages/LandingPage";
+import Dashboard from "./pages/Dashboard";
+import ErrorPage from "./pages/ErrorPage";
+import MainNavbar from "./components/MainNavbar";
 
-import './styles/App.css';
+import "./styles/App.css";
 
 function App() {
   return (

@@ -1,14 +1,14 @@
-import Button from 'react-bootstrap/Button';
-import InputGroup from 'react-bootstrap/InputGroup';
-import FormControl from 'react-bootstrap/FormControl';
-import React, { useRef } from 'react';
+import Button from "react-bootstrap/Button";
+import InputGroup from "react-bootstrap/InputGroup";
+import FormControl from "react-bootstrap/FormControl";
+import React, { useRef } from "react";
 
 interface FriendsToolbarProps {
-  clickHandler: (username: any) => void
+  clickHandler: (username: any) => void;
 }
 
 const FriendsToolbar = (props: FriendsToolbarProps) => {
-  const usernameInput = useRef<any>(null)
+  const usernameInput = useRef<any>(null);
 
   return (
     <InputGroup className="mb-3">
@@ -19,15 +19,15 @@ const FriendsToolbar = (props: FriendsToolbarProps) => {
         aria-describedby="basic-addon2"
       />
       <InputGroup.Append>
-        <Button 
-          variant="outline-secondary" 
-          onClick={() => props.clickHandler(usernameInput)}>
-            Add
+        <Button
+          variant="outline-secondary"
+          onClick={() => props.clickHandler(usernameInput)}
+        >
+          Add
         </Button>
       </InputGroup.Append>
     </InputGroup>
   );
-}
+};
 
 export default FriendsToolbar;
-

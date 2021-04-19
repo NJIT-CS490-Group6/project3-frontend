@@ -22,16 +22,16 @@
   margin-left: 1rem;
 }
 .list-group.friends-list::-webkit-scrollbar {
-  width: 5px;               /* width of the entire scrollbar */
+  width: 5px; /* width of the entire scrollbar */
 }
 
 .list-group.friends-list::-webkit-scrollbar-track {
-  background: #ffffff;        /* color of the tracking area */
+  background: #ffffff; /* color of the tracking area */
 }
 
 .list-group.friends-list::-webkit-scrollbar-thumb {
-  background-color: rgb(116, 116, 116);    /* color of the scroll thumb */
-  border-radius: 20px;       /* roundness of the scroll thumb */
+  background-color: rgb(116, 116, 116); /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
 }
 
 .list-group.friends-list {

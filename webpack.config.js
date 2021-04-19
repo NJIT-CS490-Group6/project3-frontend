@@ -3,10 +3,10 @@ var config = {
   entry: ["./app.tsx"],
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: "bundle.js"
+    filename: "bundle.js",
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js"]
+    extensions: [".ts", ".tsx", ".js"],
   },
 
   module: {
@@ -14,10 +14,10 @@ var config = {
       {
         test: /.tsx?$/,
         loader: "ts-loader",
-        exclude: /node_modules/
-      }
-    ]
-  }
+        exclude: /node_modules/,
+      },
+    ],
+  },
 };
 
 module.exports = config;
