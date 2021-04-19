@@ -5,67 +5,25 @@ import FriendsToolbar from './FriendsToolbar';
 
 import '../styles/FriendsList.css';
 
-const allFriends: Friend[] = [
-  new Friend(
-    "f48c1eca-295d-4603-8433-bbfa645ce92a",
-    "jerry123",
-    "Jerry Smith",
-    {
-    status: "available",
-    timestamp: "2017-07-21T17:32:28Z"
-    }
-  ),
-  new Friend(
-    "f48c1eca-295d-4603-8433-bbfa645gf44a",
-    "mike123",
-    "Mike Low",
-    {
-    status: "available",
-    timestamp: "2017-07-21T17:32:28Z"
-    }
-  ),
-  new Friend(
-    "f48c1eca-295d-4603-8433-bbfa64511111",
-    "Alex65",
-    "Alex Derry",
-    {
-    status: "busy",
-    timestamp: "2017-07-21T17:32:28Z"
-    }
-  ),
-  new Friend(
-    "f48c1eca-295d-4603-8433-bbfa645fd135",
-    "Darian123",
-    "Darian Puccio",
-    {
-    status: "offline",
-    timestamp: "2017-07-21T17:32:28Z"
-    }
-  ),
-  new Friend(
-    "f48c1eca-295d-4603-8433-bbfa645bvcd3",
-    "Tyler999",
-    "Tyler Smith",
-    {
-    status: "offline",
-    timestamp: "2017-07-21T17:32:28Z"
-    }
-  )
-];
-
 const FriendsList = () => {
   const hasFetchedData = useRef(false);
   const [friends, setFriends] = useState<Friend[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-
-
   const onClickFriend = () => {
     alert("Pull up friend profile");
   }
 
-  const onAddFriend = (username: any) => {
-    alert(`Send Friend Request to , ${username.current.value}`);
+  const onAddFriend = async (username: any) => {
+    const response = await fetch('http://localhost:3000/api/v1/friends', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+        body: JSON.stringify({username})
+    })
+    const data = await response.json();
+    console.log(data);
   }
 
   const getVariant: any = (status: string) => {
@@ -79,22 +37,57 @@ const FriendsList = () => {
     }
     return result;
   } 
+
+  const mapStatus = (statusCode: number) => {
+    let status = '';
+    switch(statusCode) {
+      case 0:
+        status = 'available';
+        break;
+      case 1:
+        status = 'busy';
+        break;
+      case 2:
+        status = 'offline'
+        break;
+      default:
+        break;
+    }
+    return status;
+  }
   
   useEffect(() => {
-    let timer: ReturnType<typeof setTimeout>;
-    const fetchFriendsHandler = () => {
+    const myAbortController = new AbortController();
+    const fetchFriendsHandler = async () => {
       setIsLoading(true);
-      timer = setTimeout(() => {
-        setIsLoading(false);
-        setFriends(allFriends);
-      }, 1000);
+      const response = await fetch(
+        'http://localhost:3000/api/v1/friends', 
+        { signal: myAbortController.signal }
+      );
+      const data = await response.json();
+
+      const allFriends = [];
+      for (let i = 0; i < data.length; i += 1) {
+        const status = mapStatus(data[i].status)
+        const friend = new Friend(
+          data[i].id,
+          data[i].username,
+          `${data[i].first_name} ${data[i].last_name}`,
+          {status, timestamp: data[i].created_at},
+        )
+        allFriends.push(friend);
+      }
+      setFriends(allFriends)
+      setIsLoading(false);
     }
+
     if (!hasFetchedData.current) {
       fetchFriendsHandler();
       hasFetchedData.current = true;
     }
+
     return () => {
-      clearTimeout(timer)
+      myAbortController.abort();
     }
   }, []);
 
