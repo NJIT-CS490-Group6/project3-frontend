@@ -1,4 +1,5 @@
 import ListGroup from "react-bootstrap/ListGroup";
+import Form from "react-bootstrap/Form";
 import React, { useState, useEffect, useRef } from "react";
 import { Friend } from "../models/friend.model";
 import FriendsToolbar from "./FriendsToolbar";
@@ -7,15 +8,20 @@ import "../styles/FriendsList.css";
 
 const FriendsList = () => {
   const hasFetchedData = useRef(false);
+  const availabilityInput = useRef<any>(null);
   const [friends, setFriends] = useState<Friend[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const checkAvailability = () => {
+    console.log(availabilityInput.current.checked);
+  };
 
   const onClickFriend = () => {
     alert("Pull up friend profile");
   };
 
   const onAddFriend = async (username: any) => {
-    const response = await fetch("http://localhost:3000/api/v1/friends", {
+    const response = await fetch("https://cloud.lucasantarella.com/api/v1/friends", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -60,7 +66,7 @@ const FriendsList = () => {
     const myAbortController = new AbortController();
     const fetchFriendsHandler = async () => {
       setIsLoading(true);
-      const response = await fetch("http://localhost:3000/api/v1/friends", {
+      const response = await fetch("https://cloud.lucasantarella.com/api/v1/friends", {
         signal: myAbortController.signal,
       });
       const data = await response.json();
@@ -93,6 +99,15 @@ const FriendsList = () => {
   return (
     <div>
       <FriendsToolbar clickHandler={onAddFriend} />
+      <Form>
+        <Form.Check 
+          ref={availabilityInput}
+          type="switch"
+          id="custom-switch"
+          label="Current Status"
+          onClick={checkAvailability}
+        />
+      </Form>
       <div className="legend">
         <span>
           <div id="available-square" />
