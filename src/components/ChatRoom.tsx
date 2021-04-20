@@ -5,7 +5,7 @@ import "../styles/ChatRoom.css";
 
 const ChatRoom = () => {
   console.log();
-  
+
   /*
   
   const [yourID, setYourID] = useState();
@@ -48,8 +48,7 @@ const ChatRoom = () => {
     }
     
     */
-  
-  
+
   return (
     <Card className="chat-room-container">
       <Card.Header>

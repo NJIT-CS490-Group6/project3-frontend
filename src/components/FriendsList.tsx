@@ -21,13 +21,16 @@ const FriendsList = () => {
   };
 
   const onAddFriend = async (username: any) => {
-    const response = await fetch("https://cloud.lucasantarella.com/api/v1/friends", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username }),
-    });
+    const response = await fetch(
+      "https://cloud.lucasantarella.com/api/v1/friends",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username }),
+      }
+    );
     const data = await response.json();
     console.log(data);
   };
@@ -66,9 +69,12 @@ const FriendsList = () => {
     const myAbortController = new AbortController();
     const fetchFriendsHandler = async () => {
       setIsLoading(true);
-      const response = await fetch("https://cloud.lucasantarella.com/api/v1/friends", {
-        signal: myAbortController.signal,
-      });
+      const response = await fetch(
+        "https://cloud.lucasantarella.com/api/v1/friends",
+        {
+          signal: myAbortController.signal,
+        }
+      );
       const data = await response.json();
 
       const allFriends = [];
@@ -100,7 +106,7 @@ const FriendsList = () => {
     <div>
       <FriendsToolbar clickHandler={onAddFriend} />
       <Form>
-        <Form.Check 
+        <Form.Check
           ref={availabilityInput}
           type="switch"
           id="custom-switch"
