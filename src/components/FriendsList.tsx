@@ -15,7 +15,7 @@ const FriendsList = () => {
   };
 
   const onAddFriend = async (username: any) => {
-    const response = await fetch("http://localhost:3000/api/v1/friends", {
+    const response = await fetch("https://cloud.lucasantarella.com/api/v1/friends", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -60,7 +60,7 @@ const FriendsList = () => {
     const myAbortController = new AbortController();
     const fetchFriendsHandler = async () => {
       setIsLoading(true);
-      const response = await fetch("http://localhost:3000/api/v1/friends", {
+      const response = await fetch("https://cloud.lucasantarella.com/api/v1/friends", {
         signal: myAbortController.signal,
       });
       const data = await response.json();
