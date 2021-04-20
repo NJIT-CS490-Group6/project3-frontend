@@ -22,3 +22,18 @@ test("app rendering/navigating", () => {
   // check that the content changed to the new page
   expect(screen.getByText(/Available/i)).toBeInTheDocument();
 });
+
+test("add a friend function rendered", () => {
+  const history = createMemoryHistory();
+  render(
+    <Router history={history}>
+      <App />
+    </Router>
+  );
+  
+  const leftClick = { button: 0 };
+  userEvent.click(screen.getByText(/Dashboard/i), leftClick);
+
+  // check that the content changed to the new page
+  expect(screen.getByText(/Add/i)).toBeInTheDocument();
+});
