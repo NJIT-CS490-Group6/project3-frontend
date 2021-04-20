@@ -1,0 +1,15 @@
+.jumbotron {
+  width: 90%;
+}
+
+.black-container {
+  background-color: black;
+  color: white;
+  min-height: 500px;
+}
+
+.about-app {
+  margin-top: 7rem !important;
+  margin-left: 5rem;
+  font-size: 20px;
+}

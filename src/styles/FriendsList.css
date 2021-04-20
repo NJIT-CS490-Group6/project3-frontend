@@ -1,0 +1,66 @@
+#available-square {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #c3e6cb;
+  margin-right: 1rem;
+}
+#busy-square {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #f5c6cb;
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+#offline-square {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #c6c8ca;
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+.list-group.friends-list::-webkit-scrollbar {
+  width: 5px; /* width of the entire scrollbar */
+}
+
+.list-group.friends-list::-webkit-scrollbar-track {
+  background: #ffffff; /* color of the tracking area */
+}
+
+.list-group.friends-list::-webkit-scrollbar-thumb {
+  background-color: rgb(116, 116, 116); /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+}
+
+.list-group.friends-list {
+  scrollbar-width: thin;
+  overflow-y: scroll;
+  max-height: 800px;
+  scroll-behavior: smooth;
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: 0 0 0 0rem rgba(0, 0, 0, 0) !important;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #c3e6cb !important;
+  background-color: #c3e6cb !important;
+}
+
+.custom-control-input:active ~ .custom-control-label::before {
+  background-color: #c3e6cb !important;
+  border-color: #c3e6cb !important;
+}
+
+.custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
+  border-color: #f5c6cb !important;
+  background-color: #f5c6cb !important;
+}
+
+.custom-control-input:not(:checked) ~ .custom-control-label::before {
+  border-color: #f5c6cb !important;
+  background-color: #f5c6cb !important;
+}

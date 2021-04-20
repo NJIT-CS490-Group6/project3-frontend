@@ -1,105 +1,150 @@
-import FriendsToolbar from './FriendsToolbar';
-import ListGroup from 'react-bootstrap/ListGroup';
-import { useState, useEffect, useRef } from 'react';
-import { Friend } from '../models/friend.model';
+import ListGroup from "react-bootstrap/ListGroup";
+import Form from "react-bootstrap/Form";
+import React, { useState, useEffect, useRef } from "react";
+import { Friend } from "../models/friend.model";
+import FriendsToolbar from "./FriendsToolbar";
 
-const allFriends: Friend[] = [
-  new Friend(
-    "f48c1eca-295d-4603-8433-bbfa645ce92a",
-    "jerry123",
-    "Jerry Smith",
-    {
-    status: "available",
-    timestamp: "2017-07-21T17:32:28Z"
-    }
-  ),
-  new Friend(
-    "f48c1eca-295d-4603-8433-bbfa645gf44a",
-    "mike123",
-    "Mike Low",
-    {
-    status: "available",
-    timestamp: "2017-07-21T17:32:28Z"
-    }
-  ),
-  new Friend(
-    "f48c1eca-295d-4603-8433-bbfa64511111",
-    "Alex65",
-    "Alex Derry",
-    {
-    status: "busy",
-    timestamp: "2017-07-21T17:32:28Z"
-    }
-  ),
-  new Friend(
-    "f48c1eca-295d-4603-8433-bbfa645fd135",
-    "Darian123",
-    "Darian Puccio",
-    {
-    status: "offline",
-    timestamp: "2017-07-21T17:32:28Z"
-    }
-  ),
-  new Friend(
-    "f48c1eca-295d-4603-8433-bbfa645bvcd3",
-    "Tyler999",
-    "Tyler Smith",
-    {
-    status: "offline",
-    timestamp: "2017-07-21T17:32:28Z"
-    }
-  ),
-];
+import "../styles/FriendsList.css";
 
 const FriendsList = () => {
   const hasFetchedData = useRef(false);
+  const availabilityInput = useRef<any>(null);
   const [friends, setFriends] = useState<Friend[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-
+  const checkAvailability = () => {
+    console.log(availabilityInput.current.checked);
+  };
 
   const onClickFriend = () => {
     alert("Pull up friend profile");
-  }
+  };
 
-  const onAddFriend = (username: any) => {
-    alert('Send Friend Request to '+ username.current.value);
-  }
-  
-  useEffect(() => {
-    let timer: ReturnType<typeof setTimeout>;
-    const fetchFriendsHandler = () => {
-      setIsLoading(true);
-      timer = setTimeout(() => {
-        setIsLoading(false);
-        setFriends(allFriends);
-      }, 1000);
+  const onAddFriend = async (username: any) => {
+    const response = await fetch(
+      "https://cloud.lucasantarella.com/api/v1/friends",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username }),
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+  };
+
+  const getVariant: any = (status: string) => {
+    let result = "";
+    if (status === "available") {
+      result = "success";
+    } else if (status === "busy") {
+      result = "danger";
+    } else if (status === "offline") {
+      result = "dark";
     }
+    return result;
+  };
+
+  const mapStatus = (statusCode: number) => {
+    let status = "";
+    switch (statusCode) {
+      case 0:
+        status = "available";
+        break;
+      case 1:
+        status = "busy";
+        break;
+      case 2:
+        status = "offline";
+        break;
+      default:
+        break;
+    }
+    return status;
+  };
+
+  useEffect(() => {
+    const myAbortController = new AbortController();
+    const fetchFriendsHandler = async () => {
+      setIsLoading(true);
+      const response = await fetch(
+        "https://cloud.lucasantarella.com/api/v1/friends",
+        {
+          signal: myAbortController.signal,
+        }
+      );
+      const data = await response.json();
+
+      const allFriends = [];
+      for (let i = 0; i < data.length; i += 1) {
+        const status = mapStatus(data[i].status);
+        const friend = new Friend(
+          data[i].id,
+          data[i].username,
+          `${data[i].first_name} ${data[i].last_name}`,
+          { status, timestamp: data[i].created_at }
+        );
+        allFriends.push(friend);
+      }
+      setFriends(allFriends);
+      setIsLoading(false);
+    };
+
     if (!hasFetchedData.current) {
       fetchFriendsHandler();
       hasFetchedData.current = true;
     }
+
     return () => {
-      clearTimeout(timer)
-    }
+      myAbortController.abort();
+    };
   }, []);
 
   return (
     <div>
-      <FriendsToolbar clickHandler={onAddFriend}></FriendsToolbar>
-      {!isLoading && <ListGroup defaultActiveKey="#link1">
-        {friends.map(friend => (
-          <ListGroup.Item 
-            action 
-            onClick={onClickFriend}
-            key={friend.id}>
-              {friend.name}
-          </ListGroup.Item>
-        ))}
-      </ListGroup>}
+      <FriendsToolbar clickHandler={onAddFriend} />
+      <Form>
+        <Form.Check
+          ref={availabilityInput}
+          type="switch"
+          id="custom-switch"
+          label="Current Status"
+          onClick={checkAvailability}
+        />
+      </Form>
+      <div className="legend">
+        <span>
+          <div id="available-square" />
+          Available
+        </span>
+        <span>
+          <div id="busy-square" />
+          Busy
+        </span>
+        <span>
+          <div id="offline-square" />
+          Offline
+        </span>
+      </div>
+      {!isLoading && (
+        <ListGroup defaultActiveKey="#link1" className="friends-list">
+          {friends.map((friend) => (
+            <ListGroup.Item
+              action
+              variant={getVariant(friend.status.status)}
+              onClick={onClickFriend}
+              key={friend.id}
+            >
+              {friend.username}
+            </ListGroup.Item>
+          ))}
+        </ListGroup>
+      )}
       {isLoading && <p>Loading Friends list...</p>}
     </div>
   );
-}
+};
 
 export default FriendsList;
