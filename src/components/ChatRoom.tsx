@@ -6,7 +6,7 @@ import "../styles/ChatRoom.css";
 const ChatRoom = () => {
   console.log();
   
-  
+  /*
   
   const [yourID, setYourID] = useState();
   const [messages, setMessages] = useState<{body: string, id: any}[]>([]);
@@ -47,7 +47,7 @@ const ChatRoom = () => {
       setMessage(e.target.value);
     }
     
-    
+    */
   
   
   return (
