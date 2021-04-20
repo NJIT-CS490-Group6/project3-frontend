@@ -40,3 +40,28 @@
   max-height: 800px;
   scroll-behavior: smooth;
 }
+
+.custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: 0 0 0 0rem rgba(0, 0, 0, 0) !important;
+}
+  
+.custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #c3e6cb !important;
+  background-color: #c3e6cb !important;
+}
+  
+ 
+.custom-control-input:active ~ .custom-control-label::before {
+  background-color: #c3e6cb !important;
+  border-color: #c3e6cb !important;
+}
+  
+.custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
+  border-color: #f5c6cb !important;
+  background-color: #f5c6cb !important;
+}
+
+.custom-control-input:not(:checked) ~ .custom-control-label::before {
+  border-color: #f5c6cb !important;
+  background-color: #f5c6cb !important;
+}
