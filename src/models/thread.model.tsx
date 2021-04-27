@@ -10,7 +10,7 @@ export class Thread {
     public lastMessage: {
       id: string;
       seq: number;
-      timestamp: number;
+      timestamp: string;
       from: string;
       content: string;
     }

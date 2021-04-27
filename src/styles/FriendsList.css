@@ -37,7 +37,8 @@
 .list-group.friends-list {
   scrollbar-width: thin;
   overflow-y: scroll;
-  max-height: 800px;
+  min-height: 400px;
+  max-height: 400px;
   scroll-behavior: smooth;
 }
 
