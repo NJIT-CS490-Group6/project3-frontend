@@ -71,11 +71,11 @@ const FriendsList = () => {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ username }),
+        body: JSON.stringify({ username: username.current.value }),
       }
     );
-    const data = await response.json();
-    console.log(data);
+    const data: Friend = await response.json();
+    setFriends([...friends, data]);
   };
 
   const getVariant: any = (status: string) => {
