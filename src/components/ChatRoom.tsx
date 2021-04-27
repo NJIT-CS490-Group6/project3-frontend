@@ -64,9 +64,9 @@ const ChatRoom = (props: ChatRoomProps) => {
               Chat with {activeChatRoom.participants.map((participant, index) => {
                 let result: string = '';
                 if (index !== activeChatRoom.participants.length - 1) {
-                  result = `${participant.name}, `;
+                  result = `${participant.username}, `;
                 } else {
-                  result = `and ${participant.name}`;
+                  result = `and ${participant.username}`;
                 }
                 return result;
               })}
