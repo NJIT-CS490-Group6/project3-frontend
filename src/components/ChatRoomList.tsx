@@ -87,16 +87,19 @@ const allThreads: Thread[] = [
   )
 ];
 
+interface ChatRoomListProps {
+  onSelectChatRoom: (thread: Thread) => void;
+}
 
-
-
-const ChatRoomList = () => {
+const ChatRoomList = (props: ChatRoomListProps) => {
   const hasFetchedData = useRef(false);
   const [threads, setThreads] = useState<Thread[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const onClickThread = () => {
-    alert("Pull up this Chat Room");
+  const { onSelectChatRoom } = props;
+
+  const onClickThread = (thread: Thread) => {
+    onSelectChatRoom(thread);
   };
 
   useEffect(() => {
@@ -161,7 +164,7 @@ const ChatRoomList = () => {
             {threads.map((thread) => (
               <ListGroup.Item
                 action
-                onClick={onClickThread}
+                onClick={() => onClickThread(thread)}
                 key={thread.id}
                 variant="info"
               >
