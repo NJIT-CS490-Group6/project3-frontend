@@ -21,7 +21,7 @@ function App() {
           <MainNavbar />
           <Dashboard />
         </Route>
-        <Route path="/profile">
+        <Route path="/profile/:id">
           <MainNavbar />
           <ProfilePage />
         </Route>

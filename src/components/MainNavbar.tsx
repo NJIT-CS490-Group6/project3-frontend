@@ -21,7 +21,7 @@ const MainNavbar = () => (
     </Nav>
     <Navbar.Collapse className="justify-content-end">
       <Navbar.Text>
-        Signed in as: <a href="/profile">Test User</a>
+        Signed in as: <NavLink to="/profile/logged-in-user-id">Test User</NavLink>
       </Navbar.Text>
     </Navbar.Collapse>
   </Navbar>

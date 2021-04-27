@@ -1,5 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useParams } from "react-router-dom";
 import { Friend } from "../models/friend.model";
+
+interface ProfileRouteParams {
+    id: string;
+}
 
 const emptyFriendObject = new Friend(
     "",
@@ -22,6 +27,9 @@ const requestedInfo = new Friend(
 );
 
 const ProfilePage = () => {
+
+    const { id } = useParams<ProfileRouteParams>();
+    console.log(id);
     // under the assumption that our own id is known, for now ill write this as...
     // ...a get friend request to the api
 
