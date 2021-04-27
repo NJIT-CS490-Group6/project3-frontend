@@ -1,8 +1,8 @@
 import ListGroup from "react-bootstrap/ListGroup";
-import Form from "react-bootstrap/Form";
 import React, { useState, useEffect, useRef } from "react";
 import { Friend } from "../models/friend.model";
 import FriendsToolbar from "./FriendsToolbar";
+import StatusSwitch from "./StatusSwitch";
 
 import "../styles/FriendsList.css";
 
@@ -56,13 +56,8 @@ const allFriends: Friend[] = [
 
 const FriendsList = () => {
   const hasFetchedData = useRef(false);
-  const availabilityInput = useRef<any>(null);
   const [friends, setFriends] = useState<Friend[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const checkAvailability = () => {
-    console.log(availabilityInput.current.checked);
-  };
 
   const onClickFriend = () => {
     alert("Pull up friend profile");
@@ -161,15 +156,7 @@ const FriendsList = () => {
 
   return (
     <div>
-      <Form>
-        <Form.Check
-          ref={availabilityInput}
-          type="switch"
-          id="custom-switch"
-          label="Current Status"
-          onClick={checkAvailability}
-        />
-      </Form>
+      <StatusSwitch />
       <FriendsToolbar clickHandler={onAddFriend} />
       <div className="heading my-3">Friends List:</div>
       {!isLoading && (
