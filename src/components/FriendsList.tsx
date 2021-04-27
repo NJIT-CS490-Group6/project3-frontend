@@ -6,6 +6,54 @@ import FriendsToolbar from "./FriendsToolbar";
 
 import "../styles/FriendsList.css";
 
+const allFriends: Friend[] = [
+  new Friend(
+    "f48c1eca-295d-4603-8433-bbfa645ce92a",
+    "jerry123",
+    "Jerry Smith",
+    {
+    status: "available",
+    timestamp: "2017-07-21T17:32:28Z"
+    }
+  ),
+  new Friend(
+    "f48c1eca-295d-4603-8433-bbfa645gf44a",
+    "mike123",
+    "Mike Low",
+    {
+    status: "available",
+    timestamp: "2017-07-21T17:32:28Z"
+    }
+  ),
+  new Friend(
+    "f48c1eca-295d-4603-8433-bbfa64511111",
+    "Alex65",
+    "Alex Derry",
+    {
+    status: "busy",
+    timestamp: "2017-07-21T17:32:28Z"
+    }
+  ),
+  new Friend(
+    "f48c1eca-295d-4603-8433-bbfa645fd135",
+    "Darian123",
+    "Darian Puccio",
+    {
+    status: "offline",
+    timestamp: "2017-07-21T17:32:28Z"
+    }
+  ),
+  new Friend(
+    "f48c1eca-295d-4603-8433-bbfa645bvcd3",
+    "Tyler999",
+    "Tyler Smith",
+    {
+    status: "offline",
+    timestamp: "2017-07-21T17:32:28Z"
+    }
+  )
+];
+
 const FriendsList = () => {
   const hasFetchedData = useRef(false);
   const availabilityInput = useRef<any>(null);
@@ -66,31 +114,39 @@ const FriendsList = () => {
   };
 
   useEffect(() => {
-    const myAbortController = new AbortController();
-    const fetchFriendsHandler = async () => {
+    // const myAbortController = new AbortController();
+    let timer: ReturnType<typeof setTimeout>;
+    const fetchFriendsHandler = () => {
       setIsLoading(true);
-      const response = await fetch(
-        "https://cloud.lucasantarella.com/api/v1/friends",
-        {
-          signal: myAbortController.signal,
-        }
-      );
-      const data = await response.json();
+      timer = setTimeout(() => {
+        setIsLoading(false);
+        setFriends(allFriends);
+      }, 1000);
+    }
+    // const fetchFriendsHandler = async () => {
+    //   setIsLoading(true);
+    //   const response = await fetch(
+    //     "https://cloud.lucasantarella.com/api/v1/friends",
+    //     {
+    //       signal: myAbortController.signal,
+    //     }
+    //   );
+    //   const data = await response.json();
 
-      const allFriends = [];
-      for (let i = 0; i < data.length; i += 1) {
-        const status = mapStatus(data[i].status);
-        const friend = new Friend(
-          data[i].id,
-          data[i].username,
-          `${data[i].first_name} ${data[i].last_name}`,
-          { status, timestamp: data[i].created_at }
-        );
-        allFriends.push(friend);
-      }
-      setFriends(allFriends);
-      setIsLoading(false);
-    };
+    //   const allFriends = [];
+    //   for (let i = 0; i < data.length; i += 1) {
+    //     const status = mapStatus(data[i].status);
+    //     const friend = new Friend(
+    //       data[i].id,
+    //       data[i].username,
+    //       `${data[i].first_name} ${data[i].last_name}`,
+    //       { status, timestamp: data[i].created_at }
+    //     );
+    //     allFriends.push(friend);
+    //   }
+    //   setFriends(allFriends);
+    //   setIsLoading(false);
+    // };
 
     if (!hasFetchedData.current) {
       fetchFriendsHandler();
@@ -98,13 +154,13 @@ const FriendsList = () => {
     }
 
     return () => {
-      myAbortController.abort();
+      // myAbortController.abort();
+      clearTimeout(timer);
     };
   }, []);
 
   return (
     <div>
-      <FriendsToolbar clickHandler={onAddFriend} />
       <Form>
         <Form.Check
           ref={availabilityInput}
@@ -114,20 +170,8 @@ const FriendsList = () => {
           onClick={checkAvailability}
         />
       </Form>
-      <div className="legend">
-        <span>
-          <div id="available-square" />
-          Available
-        </span>
-        <span>
-          <div id="busy-square" />
-          Busy
-        </span>
-        <span>
-          <div id="offline-square" />
-          Offline
-        </span>
-      </div>
+      <FriendsToolbar clickHandler={onAddFriend} />
+      <div className="heading my-3">Friends List:</div>
       {!isLoading && (
         <ListGroup defaultActiveKey="#link1" className="friends-list">
           {friends.map((friend) => (
@@ -143,6 +187,20 @@ const FriendsList = () => {
         </ListGroup>
       )}
       {isLoading && <p>Loading Friends list...</p>}
+      <div className="legend">
+        <span>
+          <div id="available-square" />
+          Available
+        </span>
+        <span>
+          <div id="busy-square" />
+          Busy
+        </span>
+        <span>
+          <div id="offline-square" />
+          Offline
+        </span>
+      </div>
     </div>
   );
 };

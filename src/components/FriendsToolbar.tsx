@@ -11,7 +11,7 @@ const FriendsToolbar = (props: FriendsToolbarProps) => {
   const usernameInput = useRef<any>(null);
 
   return (
-    <InputGroup className="mb-3">
+    <InputGroup className="my-3">
       <FormControl
         ref={usernameInput}
         placeholder="Enter Friend's Username"

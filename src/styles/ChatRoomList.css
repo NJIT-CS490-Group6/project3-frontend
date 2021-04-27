@@ -1,4 +1,8 @@
 .heading {
     font-size: 20px;
-    text-decoration: underline;
+}
+
+.chat-room-list-container {
+    white-space: nowrap;
+    overflow: hidden;
 }

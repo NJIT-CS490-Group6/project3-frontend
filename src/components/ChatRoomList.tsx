@@ -155,22 +155,29 @@ const ChatRoomList = () => {
   return (
     <div>
       {!isLoading && (
-        <ListGroup defaultActiveKey="#link1" className="threads-list">
-          <div className="heading">Open chatrooms:</div>
-          {threads.map((thread) => (
-            <ListGroup.Item
-              action
-              onClick={onClickThread}
-              key={thread.id}
-              variant="info"
-            >
-              Chatroom with:&nbsp;
-              {thread.participants.map((user) => (
-                  `${user.username}, `
-              ))}
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
+        <div className="chat-room-list-container my-3">
+          <div className="heading mb-3">Open chatrooms:</div>
+          <ListGroup defaultActiveKey="#link1" className="threads-list">
+            {threads.map((thread) => (
+              <ListGroup.Item
+                action
+                onClick={onClickThread}
+                key={thread.id}
+                variant="info"
+              >
+                <span className="particpants">
+                    {thread.participants.map((user) => (
+                        `${user.username}, `
+                    ))}
+                </span>
+                <br />
+                <span className="last-message">
+                  Last Message:&nbsp;{thread.lastMessage.content}
+                </span>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </div>
       )}
       {isLoading && <p>Loading Chat Room list...</p>}
     </div>
