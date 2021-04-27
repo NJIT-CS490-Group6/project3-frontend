@@ -32,3 +32,7 @@
 .chat-room-container {
   min-height: 80vh;
 }
+
+.no-chat-selected {
+  margin-top: 20vh;
+}
