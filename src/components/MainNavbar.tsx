@@ -7,16 +7,13 @@ import "../styles/MainNavbar.css";
 
 const MainNavbar = () => (
   <Navbar bg="dark" variant="dark">
-    <Navbar.Brand href="/">Lets Hangout!</Navbar.Brand>
+    <Navbar.Brand href="/">Hangout</Navbar.Brand>
     <Nav className="mr-auto">
-      <NavLink to="/" className="navlink" exact activeClassName="active">
+      <NavLink to="/" className="navlink mr-2" exact activeClassName="active">
         Home
       </NavLink>
       <NavLink to="/dashboard" className="navlink" activeClassName="active">
         Dashboard
-      </NavLink>
-      <NavLink to="/profile" className="navlink" activeClassName="active">
-        Profile
       </NavLink>
     </Nav>
     <Navbar.Collapse className="justify-content-end">
