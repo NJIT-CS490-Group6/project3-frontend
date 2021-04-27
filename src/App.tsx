@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import LandingPage from "./pages/LandingPage";
+import ProfilePage from "./pages/ProfilePage";
 import Dashboard from "./pages/Dashboard";
 import ErrorPage from "./pages/ErrorPage";
 import MainNavbar from "./components/MainNavbar";
@@ -19,6 +20,10 @@ function App() {
         <Route path="/dashboard">
           <MainNavbar />
           <Dashboard />
+        </Route>
+        <Route path="/profile">
+          <MainNavbar />
+          <ProfilePage />
         </Route>
         <Route path="**">
           <ErrorPage />

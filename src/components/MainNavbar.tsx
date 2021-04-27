@@ -15,10 +15,13 @@ const MainNavbar = () => (
       <NavLink to="/dashboard" className="navlink" activeClassName="active">
         Dashboard
       </NavLink>
+      <NavLink to="/profile" className="navlink" activeClassName="active">
+        Profile
+      </NavLink>
     </Nav>
     <Navbar.Collapse className="justify-content-end">
       <Navbar.Text>
-        Signed in as: <a href="/dashboard">Test User</a>
+        Signed in as: <a href="/profile">Test User</a>
       </Navbar.Text>
     </Navbar.Collapse>
   </Navbar>
