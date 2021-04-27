@@ -1,10 +1,17 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
+import { Thread } from '../models/thread.model';
 
 import "../styles/ChatRoom.css";
 
-const ChatRoom = () => {
-  console.log();
+interface ChatRoomProps {
+  activeChatRoom: Thread | null;
+}
+
+const ChatRoom = (props: ChatRoomProps) => {
+  const { activeChatRoom } = props;
+  
+  console.log(activeChatRoom);
 
   /*
   
@@ -48,29 +55,44 @@ const ChatRoom = () => {
     }
     
     */
-
   return (
-    <Card className="chat-room-container">
-      <Card.Header>
-        <h3 className="display-5 text-center">
-          Chat with Mike123 and Jerry123
-        </h3>
-      </Card.Header>
-      <Card.Body>
-        <div className="d-flex justify-content-start mb-4">
-          <div className="msg_container">
-            Hi, how are you Mike?
-            <span className="msg_time">8:40 AM, Today</span>
-          </div>
-        </div>
-        <div className="d-flex justify-content-end mb-4">
-          <div className="msg_container_send">
-            Hi Jerry I am good thanks. how about you?
-            <span className="msg_time_send">8:55 AM, Today</span>
-          </div>
-        </div>
-      </Card.Body>
-    </Card>
+    <div className="text-center">
+      {activeChatRoom && 
+        <Card className="chat-room-container">
+          <Card.Header>
+            <h3 className="display-5 text-center">
+              Chat with {activeChatRoom.participants.map((participant, index) => {
+                let result: string = '';
+                if (index !== activeChatRoom.participants.length - 1) {
+                  result = `${participant.name}, `;
+                } else {
+                  result = `and ${participant.name}`;
+                }
+                return result;
+              })}
+            </h3>
+          </Card.Header>
+          <Card.Body>
+            <div className="d-flex justify-content-start mb-4">
+              <div className="msg_container">
+                Hi, how are you Mike?
+                <span className="msg_time">8:40 AM, Today</span>
+              </div>
+            </div>
+            <div className="d-flex justify-content-end mb-4">
+              <div className="msg_container_send">
+                Hi Jerry I am good thanks. how about you?
+                <span className="msg_time_send">8:55 AM, Today</span>
+              </div>
+            </div>
+          </Card.Body>
+        </Card>
+      }
+      {!activeChatRoom && 
+        <h3 className="no-chat-selected">No Chat Room Selected</h3>
+      }
+      
+    </div>
   );
 };
 
