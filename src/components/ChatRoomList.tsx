@@ -39,7 +39,7 @@ const ChatRoomList = (props: ChatRoomListProps) => {
         .then((json) => {
           console.log(json);
           setIsLoading(false);
-          // setThreads([...threads, json]);
+          setThreads([...threads, json]);
         }).catch((err) => {
           console.log(err);
           setIsLoading(false);
@@ -60,7 +60,7 @@ const ChatRoomList = (props: ChatRoomListProps) => {
         .then((json) => {
           console.log(json);
           setIsLoading(false);
-          // setThreads(data);
+          setThreads(json);
         }).catch((err) => {
           console.log(err);
           setIsLoading(false);

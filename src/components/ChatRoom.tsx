@@ -51,7 +51,7 @@ const ChatRoom = (props: ChatRoomProps) => {
           .then((json) => {
             console.log(json);
             setIsLoading(false);
-            // setMessages(data);
+            setMessages(json);
           }).catch((err) => {
             console.log(err);
             setIsLoading(false);
