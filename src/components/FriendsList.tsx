@@ -154,7 +154,7 @@ const FriendsList = (props: FriendsListProps) => {
               >
                 <Dropdown.Item eventKey="1">Profile</Dropdown.Item>
                 <Dropdown.Item eventKey="2">Remove Friend</Dropdown.Item>
-                <Dropdown.Item eventKey="3" onClick={createThread}>Start Chat</Dropdown.Item>
+                <Dropdown.Item eventKey="3">Start Chat</Dropdown.Item>
               </DropdownButton>
             </ListGroup.Item>
           ))}
