@@ -68,10 +68,6 @@ const FriendsList = (props: FriendsListProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { socket } = props;
 
-  const onClickFriend = () => {
-    alert("Pull up friend profile");
-  };
-
   const onAddFriend = async (username: any) => {
     const response = await fetch(
       "https://cs490.lucasantarella.com/api/v1/friends",
