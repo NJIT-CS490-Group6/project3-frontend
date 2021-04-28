@@ -54,10 +54,15 @@ const allFriends: Friend[] = [
   )
 ];
 
-const FriendsList = () => {
+interface FriendsListProps {
+  socket: any;
+}
+
+const FriendsList = (props: FriendsListProps) => {
   const hasFetchedData = useRef(false);
   const [friends, setFriends] = useState<Friend[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { socket } = props;
 
   const onClickFriend = () => {
     alert("Pull up friend profile");
@@ -127,19 +132,7 @@ const FriendsList = () => {
     //     }
     //   );
     //   const data = await response.json();
-
-    //   const allFriends = [];
-    //   for (let i = 0; i < data.length; i += 1) {
-    //     const status = mapStatus(data[i].status);
-    //     const friend = new Friend(
-    //       data[i].id,
-    //       data[i].username,
-    //       `${data[i].first_name} ${data[i].last_name}`,
-    //       { status, timestamp: data[i].created_at }
-    //     );
-    //     allFriends.push(friend);
-    //   }
-    //   setFriends(allFriends);
+    //   setFriends(data);
     //   setIsLoading(false);
     // };
 
@@ -147,6 +140,9 @@ const FriendsList = () => {
       fetchFriendsHandler();
       hasFetchedData.current = true;
     }
+    socket.on('update status', () => {
+      // Presumably get back id of updated friend and request that new friend and update in friends state
+    });
 
     return () => {
       // myAbortController.abort();
@@ -156,7 +152,7 @@ const FriendsList = () => {
 
   return (
     <div>
-      <StatusSwitch />
+      <StatusSwitch socket={socket}/>
       <FriendsToolbar clickHandler={onAddFriend} />
       <div className="heading my-3">Friends List:</div>
       {!isLoading && (

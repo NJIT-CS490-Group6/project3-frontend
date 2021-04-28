@@ -1,12 +1,18 @@
+import { Socket } from 'dgram';
 import React, { useRef } from "react";
 import Form from "react-bootstrap/Form";
 
+interface StatusSwitchProps {
+  socket: any;
+}
 
-const StatusSwitch = () => {
+const StatusSwitch = (props: StatusSwitchProps) => {
   const availabilityInput = useRef<any>(null);
+  const { socket } = props;
 
-  const checkAvailability = () => {
-    console.log(availabilityInput.current.checked);
+  const updateAvailability = () => {
+    // emit update status event that passes user id and updated status
+    // socket.emit('update status', )
   };
 
   return (
@@ -16,7 +22,7 @@ const StatusSwitch = () => {
       type="switch"
       id="custom-switch"
       label="Current Status"
-      onClick={checkAvailability}
+      onClick={updateAvailability}
     />
   </Form>
   );
