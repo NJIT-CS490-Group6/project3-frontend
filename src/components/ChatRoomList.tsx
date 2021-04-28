@@ -127,20 +127,7 @@ const ChatRoomList = (props: ChatRoomListProps) => {
       });
       const data = await response.json();
 
-      const allThreads: Thread[] = [];
-      for (let i = 0; i < data.length; i += 1) {
-        const thread = new Thread(
-          //need work in here ****************************
-          data[i].id,
-          data[i].createdBy,
-          data[i].created,
-          data[i].name,
-          data[i].participants,
-          data[i].lastMessage
-        );
-        allThreads.push(thread);
-      }
-      setThreads(allThreads);
+      setThreads(data);
       setIsLoading(false);
     };
 

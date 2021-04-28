@@ -54,10 +54,15 @@ const allFriends: Friend[] = [
   )
 ];
 
-const FriendsList = () => {
+interface FriendsListProps {
+  socket: any;
+}
+
+const FriendsList = (props: FriendsListProps) => {
   const hasFetchedData = useRef(false);
   const [friends, setFriends] = useState<Friend[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { socket } = props;
 
   const onClickFriend = () => {
     alert("Pull up friend profile");
@@ -90,24 +95,6 @@ const FriendsList = () => {
     return result;
   };
 
-  const mapStatus = (statusCode: number) => {
-    let status = "";
-    switch (statusCode) {
-      case 0:
-        status = "available";
-        break;
-      case 1:
-        status = "busy";
-        break;
-      case 2:
-        status = "offline";
-        break;
-      default:
-        break;
-    }
-    return status;
-  };
-
   useEffect(() => {
     // const myAbortController = new AbortController();
     let timer: ReturnType<typeof setTimeout>;
@@ -127,19 +114,7 @@ const FriendsList = () => {
     //     }
     //   );
     //   const data = await response.json();
-
-    //   const allFriends = [];
-    //   for (let i = 0; i < data.length; i += 1) {
-    //     const status = mapStatus(data[i].status);
-    //     const friend = new Friend(
-    //       data[i].id,
-    //       data[i].username,
-    //       `${data[i].first_name} ${data[i].last_name}`,
-    //       { status, timestamp: data[i].created_at }
-    //     );
-    //     allFriends.push(friend);
-    //   }
-    //   setFriends(allFriends);
+    //   setFriends(data);
     //   setIsLoading(false);
     // };
 
@@ -147,6 +122,9 @@ const FriendsList = () => {
       fetchFriendsHandler();
       hasFetchedData.current = true;
     }
+    socket.on('/api/v1/status', () => {
+      // Presumably get back id of updated friend and request that new friend and update in friends state
+    });
 
     return () => {
       // myAbortController.abort();
@@ -156,7 +134,7 @@ const FriendsList = () => {
 
   return (
     <div>
-      <StatusSwitch />
+      <StatusSwitch socket={socket}/>
       <FriendsToolbar clickHandler={onAddFriend} />
       <div className="heading my-3">Friends List:</div>
       {!isLoading && (
