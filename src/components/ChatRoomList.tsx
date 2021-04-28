@@ -14,6 +14,7 @@ interface ChatRoomListProps {
 
 const ChatRoomList = (props: ChatRoomListProps) => {
   const hasFetchedData = useRef(false);
+  const participantsInput = useRef<any>(null);
   const [threads, setThreads] = useState<Thread[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -22,6 +23,29 @@ const ChatRoomList = (props: ChatRoomListProps) => {
   const onClickThread = (thread: Thread) => {
     onSelectChatRoom(thread);
   };
+
+  const onCreateChatroom = () => {
+    const participantsString = participantsInput?.current.value;
+    if (participantsString) {
+      participantsInput.current.value = null;
+      const participants = participantsString.split(' ')
+      setIsLoading(true);
+      fetch("https://cs490.lucasantarella.com/api/v1/threads", {
+        body: JSON.stringify({ participants }),
+        method: 'POST',
+        credentials: 'include'
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          setIsLoading(false);
+          // setThreads([...threads, json]);
+        }).catch((err) => {
+          console.log(err);
+          setIsLoading(false);
+      });
+    }
+  }
 
   useEffect(() => {
     const myAbortController = new AbortController();
@@ -59,12 +83,13 @@ const ChatRoomList = (props: ChatRoomListProps) => {
       <InputGroup className="mb-3">
         <Form.Label>To create a chatroom, enter the names of the particpants seperated by a space</Form.Label> 
         <FormControl
-          placeholder="Username"
-          aria-label="Username"
+          ref={participantsInput}
+          placeholder="Participants"
+          aria-label="Participants"
           aria-describedby="basic-addon1"
         />
       </InputGroup>
-      <Button variant="info mt-1">Create Chatroom</Button>
+      <Button onClick={onCreateChatroom} variant="info mt-1">Create Chatroom</Button>
       {!isLoading && (
         <div className="chat-room-list-container my-3">
           <div className="heading mb-3">Open chatrooms:</div>
