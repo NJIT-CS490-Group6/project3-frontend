@@ -26,7 +26,8 @@ const testUser = new Friend(
 
 function App() {
   const cookies = new Cookies();
-  const token = cookies.get('jwt');
+  cookies.set('jwt-test', 'something');
+  const token = cookies.get('jwt-test');
 
   const [currentUser, setCurrentUser] = useState<Friend>();
 

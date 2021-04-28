@@ -23,6 +23,9 @@ const FriendsList = (props: FriendsListProps) => {
   const onAddFriend = (username: any) => {
     fetch("https://cs490.lucasantarella.com/api/v1/friends", {
       method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({ username: username.current.value }),
       credentials: 'include'
     })

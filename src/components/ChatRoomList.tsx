@@ -33,6 +33,9 @@ const ChatRoomList = (props: ChatRoomListProps) => {
       fetch("https://cs490.lucasantarella.com/api/v1/threads", {
         body: JSON.stringify({ participants }),
         method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
         credentials: 'include'
       })
         .then((response) => response.json())
