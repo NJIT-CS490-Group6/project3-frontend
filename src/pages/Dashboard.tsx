@@ -36,7 +36,7 @@ const Dashboard = (props: DashboardProps) => {
         </Col>
         <Col xs={6} md={7} lg={8} xl={9}>
           <ChatRoom socket={socket} activeChatRoom={activeChatRoom} currentUser={currentUser} />
-          {activeChatRoom && <MessageSender />}
+          {activeChatRoom && <MessageSender socket={socket}/>}
         </Col>
       </Row>
     </Container>

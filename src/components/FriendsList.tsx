@@ -95,24 +95,6 @@ const FriendsList = (props: FriendsListProps) => {
     return result;
   };
 
-  const mapStatus = (statusCode: number) => {
-    let status = "";
-    switch (statusCode) {
-      case 0:
-        status = "available";
-        break;
-      case 1:
-        status = "busy";
-        break;
-      case 2:
-        status = "offline";
-        break;
-      default:
-        break;
-    }
-    return status;
-  };
-
   useEffect(() => {
     // const myAbortController = new AbortController();
     let timer: ReturnType<typeof setTimeout>;
