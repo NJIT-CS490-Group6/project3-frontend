@@ -29,7 +29,6 @@ const requestedInfo = new Friend(
 const ProfilePage = () => {
 
     const { id } = useParams<ProfileRouteParams>();
-    console.log(id);
     // under the assumption that our own id is known, for now ill write this as...
     // ...a get friend request to the api
 
@@ -44,6 +43,7 @@ const ProfilePage = () => {
         const fetchFriendsHandler = () => {
           setIsLoading(true);
           timer = setTimeout(() => {
+            console.log(id);
             setIsLoading(false);
             setProfileInfo(requestedInfo);
           }, 1000);
