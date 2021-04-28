@@ -21,18 +21,22 @@ const Dashboard = (props: DashboardProps) => {
   const { socket } = props;
   const { currentUser } = props;
   const [activeChatRoom, setActiveChatRoom] = useState<Thread | null>(null);
+  // const [friends, setFriends] = useState<Friend[]>([]);
 
   const onSelectChatRoom = (thread: Thread) => {
     setActiveChatRoom(thread);
   }
 
+  // const getFriends = () => {
+
+  // }
 
   return (
     <Container fluid>
       <Row>
         <Col xs={6} md={5} lg={4} xl={3}>
           <FriendsList socket={socket}/>
-          <ChatRoomList onSelectChatRoom={onSelectChatRoom} />
+          <ChatRoomList onSelectChatRoom={onSelectChatRoom}/>
         </Col>
         <Col xs={6} md={7} lg={8} xl={9}>
           <ChatRoom socket={socket} activeChatRoom={activeChatRoom} currentUser={currentUser} />
