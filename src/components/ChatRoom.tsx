@@ -6,6 +6,37 @@ import { Friend } from "../models/friend.model";
 
 import "../styles/ChatRoom.css";
 
+const allMessages: Message[] = [
+  new Message(
+    "f48c1eca-295d-4603-8433-bbfa647653",
+    0,
+    "2017-07-21T17:32:28Z",
+    "f48c1eca-295d-4603-8433-bbfa641234",
+    "Hey Jerry, how are you doing?"
+  ),
+  new Message(
+    "f48c1eca-295d-4603-8433-bbfa641245",
+    1,
+    "2017-07-22T17:32:28Z",
+    "f48c1eca-295d-4603-8433-bbfa645678",
+    "Hey Mike! I'm good, how are you doing?"
+  ),
+  new Message(
+    "f48c1eca-295d-4603-8433-bbfa649876",
+    2,
+    "2017-07-23T17:32:28Z",
+    "f48c1eca-295d-4603-8433-bbfa641234",
+    "Great, wanna hangout?"
+  ),
+  new Message(
+    "f48c1eca-295d-4603-8433-bbfa641111",
+    3,
+    "2017-07-24T17:32:28Z",
+    "f48c1eca-295d-4603-8433-bbfa645678",
+    "Yup"
+  )
+];
+
 interface ChatRoomProps {
   activeChatRoom: Thread | null;
   socket: any;
@@ -29,21 +60,26 @@ const ChatRoom = (props: ChatRoomProps) => {
   }, []);
 
   useEffect(() => {
-    const myAbortController = new AbortController();
-    const fetchMessagesHandler = async () => {
+    // const myAbortController = new AbortController();
+    const fetchMessagesHandler = () => {
       setIsLoading(true);
-      if (activeChatRoom) {
-        const response = await fetch(
-          `https://cloud.lucasantarella.com/api/v1/threads/${activeChatRoom?.id}/messages`,
-          {
-            signal: myAbortController.signal,
-          }
-        );
-        const data = await response.json();
-        setMessages(data);
-      }
-      setIsLoading(false);
-    };
+      setTimeout(() => {
+        setIsLoading(false);
+        setMessages(allMessages);
+      }, 1000);
+    }
+    // const fetchMessagesHandler = async () => {
+    //   setIsLoading(true);
+    //   const response = await fetch(
+    //     `https://cloud.lucasantarella.com/api/v1/threads/${activeChatRoom.id}/messages`,
+    //     {
+    //       signal: myAbortController.signal,
+    //     }
+    //   );
+    //   const data = await response.json();
+    //   setMessages(data);
+    //   setIsLoading(false);
+    // };
 
     fetchMessagesHandler();
   }, [activeChatRoom]);
