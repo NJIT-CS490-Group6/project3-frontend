@@ -1,6 +1,8 @@
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from 'react-bootstrap/Button';
-import { NavLink } from 'react-router-dom';
+import InputGroup from 'react-bootstrap/InputGroup';
+import FormControl from 'react-bootstrap/FormControl';
+import Form from 'react-bootstrap/Form';
 import React, { useState, useEffect, useRef } from "react";
 import { Thread } from '../models/thread.model';
 
@@ -53,11 +55,16 @@ const ChatRoomList = (props: ChatRoomListProps) => {
 
   return (
     <div>
-      <Button variant="info mt-3">
-        <NavLink to="/create-chat" id="create-chatroom">
-          Create Chatroom
-        </NavLink>
-      </Button>
+      <hr/>
+      <InputGroup className="mb-3">
+        <Form.Label>To create a chatroom, enter the names of the particpants seperated by a space</Form.Label> 
+        <FormControl
+          placeholder="Username"
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+        />
+      </InputGroup>
+      <Button variant="info mt-1">Create Chatroom</Button>
       {!isLoading && (
         <div className="chat-room-list-container my-3">
           <div className="heading mb-3">Open chatrooms:</div>
