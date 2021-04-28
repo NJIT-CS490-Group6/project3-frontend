@@ -1,8 +1,12 @@
-import ListGroup from "react-bootstrap/ListGroup";
 import React, { useState, useEffect, useRef } from "react";
-import { Friend } from "../models/friend.model";
+
+import ListGroup from "react-bootstrap/ListGroup";
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown';
+
 import FriendsToolbar from "./FriendsToolbar";
 import StatusSwitch from "./StatusSwitch";
+import { Friend } from "../models/friend.model";
 
 import "../styles/FriendsList.css";
 
@@ -141,12 +145,21 @@ const FriendsList = (props: FriendsListProps) => {
         <ListGroup defaultActiveKey="#link1" className="friends-list">
           {friends.map((friend) => (
             <ListGroup.Item
-              action
               variant={getVariant(friend.status.status)}
-              onClick={onClickFriend}
               key={friend.id}
             >
               {friend.username}
+              <DropdownButton
+                key="left"
+                className="friend-options"
+                drop="left"
+                variant={getVariant(friend.status.status)}
+                title=""
+              >
+                <Dropdown.Item eventKey="1">Profile</Dropdown.Item>
+                <Dropdown.Item eventKey="2">Remove Friend</Dropdown.Item>
+                <Dropdown.Item eventKey="3">Start Chat</Dropdown.Item>
+              </DropdownButton>
             </ListGroup.Item>
           ))}
         </ListGroup>
