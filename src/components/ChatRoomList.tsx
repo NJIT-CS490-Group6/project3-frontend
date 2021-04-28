@@ -21,15 +21,22 @@ const ChatRoomList = (props: ChatRoomListProps) => {
 
   useEffect(() => {
     const myAbortController = new AbortController();
-    const fetchThreadsHandler = async () => {
+    const fetchThreadsHandler = () => {
       setIsLoading(true);
-      const response = await fetch("https://cloud.lucasantarella.com/api/v1/threads", {
-        signal: myAbortController.signal,
+      fetch("https://cs490.lucasantarella.com/api/v1/threads", {
+        method: 'GET',
+        credentials: 'include',
+        signal: myAbortController.signal
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          setIsLoading(false);
+          // setThreads(data);
+        }).catch((err) => {
+          console.log(err);
+          setIsLoading(false);
       });
-      const data = await response.json();
-
-      setThreads(data);
-      setIsLoading(false);
     };
 
     if (!hasFetchedData.current) {

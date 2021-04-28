@@ -16,16 +16,6 @@ const emptyFriendObject = new Friend(
     }
 );
 
-const requestedInfo = new Friend(
-    "f48c1eca-295d-4603-8433-bbfa645ce92a",
-    "jerry123",
-    "Jerry Smith",
-    {
-    status: "available",
-    timestamp: "2017-07-21T17:32:28Z"
-    }
-);
-
 const ProfilePage = () => {
 
     const { id } = useParams<ProfileRouteParams>();
@@ -38,46 +28,32 @@ const ProfilePage = () => {
 
 
     useEffect(() => {
-        // const myAbortController = new AbortController();
-        let timer: ReturnType<typeof setTimeout>;
-        const fetchFriendsHandler = () => {
+        const myAbortController = new AbortController();
+        const fetchInfoHandler = () => {
           setIsLoading(true);
-          timer = setTimeout(() => {
-            console.log(id);
-            setIsLoading(false);
-            setProfileInfo(requestedInfo);
-          }, 1000);
-        }
-
-        // const fetchInfoHandler = async () => {
-        //   setIsLoading(true);
-        //   const response = await fetch(
-        //     "https://cloud.lucasantarella.com/api/v1/friends/{friendId}",
-        //     {
-        //       signal: myAbortController.signal,
-        //     }
-        //   );
-        //   const data = await response.json();
-        //
-        //   const profileInfoHolder = new Friend(
-        //     data[i].id,
-        //     data[i].username,
-        //     `${data[i].first_name} ${data[i].last_name}`,
-        //     { status, timestamp: data[i].created_at }
-        //   );
-        // 
-        //   setProfileInfo(profileInfoHolder);
-        //   setIsLoading(false);
-        // };
+          fetch(`https://cs490.lucasantarella.com/api/v1/friends/${id}`, {
+            method: 'GET',
+            credentials: 'include',
+            signal: myAbortController.signal
+          })
+            .then((response) => response.json())
+            .then((json) => {
+              console.log(json);
+              setIsLoading(false);
+            //   setProfileInfo(json);
+            }).catch((err) => {
+              console.log(err);
+              setIsLoading(false);
+          });
+        };
     
         if (!hasFetchedData.current) {
-          fetchFriendsHandler();
+          fetchInfoHandler();
           hasFetchedData.current = true;
         }
     
         return () => {
-          // myAbortController.abort();
-          clearTimeout(timer);
+          myAbortController.abort();
         };
     }, []);
 

@@ -1,5 +1,6 @@
 import ListGroup from "react-bootstrap/ListGroup";
 import React, { useState, useEffect, useRef } from "react";
+
 import { Friend } from "../models/friend.model";
 import FriendsToolbar from "./FriendsToolbar";
 import StatusSwitch from "./StatusSwitch";
@@ -20,19 +21,19 @@ const FriendsList = (props: FriendsListProps) => {
     alert("Pull up friend profile");
   };
 
-  const onAddFriend = async (username: any) => {
-    const response = await fetch(
-      "https://cloud.lucasantarella.com/api/v1/friends",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ username: username.current.value }),
-      }
-    );
-    const data: Friend = await response.json();
-    setFriends([...friends, data]);
+  const onAddFriend = (username: any) => {
+    fetch("https://cs490.lucasantarella.com/api/v1/friends", {
+      method: 'POST',
+      body: JSON.stringify({ username: username.current.value }),
+      credentials: 'include'
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        // setFriends([...friends, data]);
+      }).catch((err) => {
+        console.log(err);
+    });
   };
 
   const getVariant: any = (status: string) => {
@@ -49,19 +50,23 @@ const FriendsList = (props: FriendsListProps) => {
 
   useEffect(() => {
     const myAbortController = new AbortController();
-    const fetchFriendsHandler = async () => {
+    const fetchFriendsHandler = () => {
       setIsLoading(true);
-      const response = await fetch(
-        "https://cloud.lucasantarella.com/api/v1/friends",
-        {
-          signal: myAbortController.signal,
-        }
-      );
-      const data = await response.json();
-      setFriends(data);
-      setIsLoading(false);
+      fetch("https://cs490.lucasantarella.com/api/v1/friends", {
+        method: 'GET',
+        credentials: 'include',
+        signal: myAbortController.signal
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          setIsLoading(false);
+          // setFriends(json);
+        }).catch((err) => {
+          console.log(err);
+          setIsLoading(false);
+      });
     };
-
     if (!hasFetchedData.current) {
       fetchFriendsHandler();
       hasFetchedData.current = true;
@@ -69,7 +74,6 @@ const FriendsList = (props: FriendsListProps) => {
     socket.on('/api/v1/status', () => {
       // Presumably get back id of updated friend and request that new friend and update in friends state
     });
-
     return () => {
       myAbortController.abort();
     };

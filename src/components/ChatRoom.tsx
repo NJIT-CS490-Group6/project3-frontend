@@ -27,17 +27,23 @@ const ChatRoom = (props: ChatRoomProps) => {
 
   useEffect(() => {
     const myAbortController = new AbortController();
-    const fetchMessagesHandler = async () => {
-      setIsLoading(true);
+    const fetchMessagesHandler = () => {
       if (activeChatRoom) {
-        const response = await fetch(
-          `https://cloud.lucasantarella.com/api/v1/threads/${activeChatRoom?.id}/messages`,
-          {
-            signal: myAbortController.signal,
-          }
-        );
-        const data = await response.json();
-        setMessages(data);
+        setIsLoading(true);
+        fetch(`https://cs490.lucasantarella.com/api/v1/threads/${activeChatRoom?.id}/messages`, {
+          method: 'GET',
+          credentials: 'include',
+          signal: myAbortController.signal
+        })
+          .then((response) => response.json())
+          .then((json) => {
+            console.log(json);
+            setIsLoading(false);
+            // setMessages(data);
+          }).catch((err) => {
+            console.log(err);
+            setIsLoading(false);
+        });
       }
       setIsLoading(false);
     };
