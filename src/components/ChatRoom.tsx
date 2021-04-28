@@ -51,8 +51,8 @@ const ChatRoom = (props: ChatRoomProps) => {
   const { currentUser } = props;
   
   useEffect(() => {
-    socket.on('new message', () => {
-      // 
+    socket.on(`/api/v1/threads/${activeChatRoom?.id}/messages`, (updatedMessages: Message[]) => {
+      setMessages(updatedMessages);
     });
   }, [])
 

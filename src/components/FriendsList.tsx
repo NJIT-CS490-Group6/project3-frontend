@@ -122,7 +122,7 @@ const FriendsList = (props: FriendsListProps) => {
       fetchFriendsHandler();
       hasFetchedData.current = true;
     }
-    socket.on('update status', () => {
+    socket.on('/api/v1/status', () => {
       // Presumably get back id of updated friend and request that new friend and update in friends state
     });
 

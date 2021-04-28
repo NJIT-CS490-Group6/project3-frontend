@@ -4,20 +4,23 @@ import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 
+import { Thread } from '../models/thread.model';
+
 interface MessageSenderProps {
   socket: any;
+  activeChatRoom: Thread | null;
 }
 
 const MessageSender = (props: MessageSenderProps) => {
   const messageInput = useRef<any>(null);
   const { socket } = props;
+  const { activeChatRoom } = props;
 
   const onSendMessage = () => {
-    const messageContent = messageInput.current.value;
-    if (messageContent) {
+    const content = messageInput.current.value;
+    if (content) {
       messageInput.current.value = null;
-      // What is the expected object for a sent message?
-      // socket.emit("message" )
+      socket.emit(`/api/v1/threads/${activeChatRoom?.id}/messages`, { content });
     }
   }
 
