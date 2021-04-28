@@ -1,4 +1,7 @@
 import ListGroup from "react-bootstrap/ListGroup";
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown';
+
 import React, { useState, useEffect, useRef } from "react";
 
 import { Friend } from "../models/friend.model";
@@ -94,6 +97,17 @@ const FriendsList = (props: FriendsListProps) => {
               key={friend.id}
             >
               {friend.username}
+              <DropdownButton
+                key="left"
+                className="friend-options"
+                drop="left"
+                variant={getVariant(friend.status.status)}
+                title=""
+              >
+                <Dropdown.Item eventKey="1">Profile</Dropdown.Item>
+                <Dropdown.Item eventKey="2">Remove Friend</Dropdown.Item>
+                <Dropdown.Item eventKey="3">Start Chat</Dropdown.Item>
+              </DropdownButton>
             </ListGroup.Item>
           ))}
         </ListGroup>
