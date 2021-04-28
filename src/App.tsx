@@ -26,9 +26,9 @@ const testUser = new Friend(
 
 function App() {
   const cookies = new Cookies();
-  cookies.set('token', 'something', { path: '/' });
-  const token = cookies.get('token');
-  console.log(token);
+  cookies.set('jwt', 'something');
+  const token = cookies.get('jwt');
+
 
   const [currentUser, setCurrentUser] = useState<Friend>();
 
@@ -59,11 +59,11 @@ function App() {
           <Redirect to="/dashboard" />
         </Route>
         <Route path="/dashboard">
-          <MainNavbar />
+          <MainNavbar currentUser={currentUser} />
           <Dashboard socket={socket} currentUser={currentUser} />
         </Route>
         <Route path="/profile/:id">
-          <MainNavbar />
+          <MainNavbar currentUser={currentUser} />
           <ProfilePage />
         </Route>
         <Route path="**">
