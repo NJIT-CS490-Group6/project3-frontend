@@ -18,6 +18,18 @@ const ChatRoom = (props: ChatRoomProps) => {
   const { activeChatRoom } = props;
   const { socket } = props;
   const { currentUser } = props;
+
+  const messageSenderName: any = (userID: string) => {
+    let result = "test";
+    if( activeChatRoom != null){
+      for (let i=0; i < activeChatRoom.participants.length; i+=1){
+        if (activeChatRoom.participants[i].id === userID){
+          result = activeChatRoom.participants[i].username;
+        }
+      }
+    }
+    return result;
+  };
   
   useEffect(() => {
     socket.on(`/api/v1/threads/${activeChatRoom?.id}/messages`, (updatedMessages: Message[]) => {
@@ -76,7 +88,7 @@ const ChatRoom = (props: ChatRoomProps) => {
                     return (
                       <div key={message.seq} className="d-flex justify-content-start mb-4">
                         <div className="msg_container">
-                          <p>{message.from}</p>
+                          <p>{messageSenderName(message.from)}</p>
                           <p>{message.content}</p>
                           <span className="msg_time">{message.timestamp}</span>
                         </div>
@@ -86,7 +98,7 @@ const ChatRoom = (props: ChatRoomProps) => {
                   return (
                     <div key={message.seq} className="d-flex justify-content-end mb-4">
                       <div className="msg_container_send">
-                        <p>{message.from}</p>
+                        <p>{messageSenderName(message.from)}</p>
                         <p>{message.content}</p>
                         <span className="msg_time">{message.timestamp}</span>
                       </div>
