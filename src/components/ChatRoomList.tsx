@@ -1,4 +1,6 @@
 import ListGroup from "react-bootstrap/ListGroup";
+import Button from 'react-bootstrap/Button';
+import { NavLink } from 'react-router-dom';
 import React, { useState, useEffect, useRef } from "react";
 import { Thread } from '../models/thread.model';
 
@@ -51,6 +53,11 @@ const ChatRoomList = (props: ChatRoomListProps) => {
 
   return (
     <div>
+      <Button variant="info mt-3">
+        <NavLink to="/create-chat" id="create-chatroom">
+          Create Chatroom
+        </NavLink>
+      </Button>
       {!isLoading && (
         <div className="chat-room-list-container my-3">
           <div className="heading mb-3">Open chatrooms:</div>

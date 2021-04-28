@@ -20,10 +20,6 @@ const FriendsList = (props: FriendsListProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { socket } = props;
 
-  const onClickFriend = () => {
-    alert("Pull up friend profile");
-  };
-
   const onAddFriend = (username: any) => {
     fetch("https://cs490.lucasantarella.com/api/v1/friends", {
       method: 'POST',
@@ -93,7 +89,6 @@ const FriendsList = (props: FriendsListProps) => {
             <ListGroup.Item
               action
               variant={getVariant(friend.status.status)}
-              onClick={onClickFriend}
               key={friend.id}
             >
               {friend.username}
@@ -106,7 +101,6 @@ const FriendsList = (props: FriendsListProps) => {
               >
                 <Dropdown.Item eventKey="1">Profile</Dropdown.Item>
                 <Dropdown.Item eventKey="2">Remove Friend</Dropdown.Item>
-                <Dropdown.Item eventKey="3">Start Chat</Dropdown.Item>
               </DropdownButton>
             </ListGroup.Item>
           ))}
