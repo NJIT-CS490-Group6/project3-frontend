@@ -18,7 +18,7 @@ const allMessages: Message[] = [
     "f48c1eca-295d-4603-8433-bbfa641245",
     1,
     "2017-07-22T17:32:28Z",
-    "f48c1eca-295d-4603-8433-bbfa645678",
+    "f48c1eca-295d-4603-8433-bbfa645ce92a",
     "Hey Mike! I'm good, how are you doing?"
   ),
   new Message(
@@ -32,7 +32,7 @@ const allMessages: Message[] = [
     "f48c1eca-295d-4603-8433-bbfa641111",
     3,
     "2017-07-24T17:32:28Z",
-    "f48c1eca-295d-4603-8433-bbfa645678",
+    "f48c1eca-295d-4603-8433-bbfa645ce92a",
     "Yup"
   )
 ];
@@ -49,6 +49,18 @@ const ChatRoom = (props: ChatRoomProps) => {
   const { activeChatRoom } = props;
   const { socket } = props;
   const { currentUser } = props;
+
+  const messageSenderName: any = (userID: string) => {
+    let result = "test";
+    if( activeChatRoom != null){
+      for (let i=0; i < activeChatRoom.participants.length; i+=1){
+        if (activeChatRoom.participants[i].id === userID){
+          result = activeChatRoom.participants[i].username;
+        }
+      }
+    }
+    return result;
+  };
 
   useEffect(() => {
     socket.on(
@@ -113,7 +125,7 @@ const ChatRoom = (props: ChatRoomProps) => {
                         className="d-flex justify-content-start mb-4"
                       >
                         <div className="msg_container">
-                          <p>{message.from}</p>
+                          <p>{messageSenderName(message.from)}</p>
                           <p>{message.content}</p>
                           <span className="msg_time">{message.timestamp}</span>
                         </div>
@@ -126,7 +138,7 @@ const ChatRoom = (props: ChatRoomProps) => {
                       className="d-flex justify-content-end mb-4"
                     >
                       <div className="msg_container_send">
-                        <p>{message.from}</p>
+                        <p>{messageSenderName(message.from)}</p>
                         <p>{message.content}</p>
                         <span className="msg_time">{message.timestamp}</span>
                       </div>
