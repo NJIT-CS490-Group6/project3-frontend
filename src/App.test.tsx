@@ -30,7 +30,7 @@ test("add a friend function rendered", () => {
       <App />
     </Router>
   );
-  
+
   const leftClick = { button: 0 };
   userEvent.click(screen.getByText(/Dashboard/i), leftClick);
 

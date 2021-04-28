@@ -2,7 +2,7 @@ import React from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
-import { Friend } from '../models/friend.model';
+import { Friend } from "../models/friend.model";
 
 import "../styles/MainNavbar.css";
 
@@ -22,11 +22,14 @@ const MainNavbar = (props: MainNavbarProps) => {
       </Nav>
       <Navbar.Collapse className="justify-content-end">
         <Navbar.Text>
-          Signed in as: <NavLink to="/profile/logged-in-user-id">{currentUser.username}</NavLink>
+          Signed in as:{" "}
+          <NavLink to="/profile/logged-in-user-id">
+            {currentUser.username}
+          </NavLink>
         </Navbar.Text>
       </Navbar.Collapse>
     </Navbar>
   );
-}
+};
 
 export default MainNavbar;

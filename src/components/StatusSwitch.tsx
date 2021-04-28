@@ -1,4 +1,4 @@
-import { Socket } from 'dgram';
+import { Socket } from "dgram";
 import React, { useRef } from "react";
 import Form from "react-bootstrap/Form";
 
@@ -16,16 +16,16 @@ const StatusSwitch = (props: StatusSwitchProps) => {
   };
 
   return (
-  <Form>
-    <Form.Check
-      ref={availabilityInput}
-      type="switch"
-      id="custom-switch"
-      label="Current Status"
-      onClick={updateAvailability}
-    />
-  </Form>
+    <Form>
+      <Form.Check
+        ref={availabilityInput}
+        type="switch"
+        id="custom-switch"
+        label="Current Status"
+        onClick={updateAvailability}
+      />
+    </Form>
   );
-}
+};
 
 export default StatusSwitch;

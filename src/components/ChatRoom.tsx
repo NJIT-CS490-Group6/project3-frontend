@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
-import { Message } from '../models/message.model';
-import { Thread } from '../models/thread.model';
-import { Friend } from '../models/friend.model';
+import { Message } from "../models/message.model";
+import { Thread } from "../models/thread.model";
+import { Friend } from "../models/friend.model";
 
 import "../styles/ChatRoom.css";
 
@@ -49,12 +49,15 @@ const ChatRoom = (props: ChatRoomProps) => {
   const { activeChatRoom } = props;
   const { socket } = props;
   const { currentUser } = props;
-  
+
   useEffect(() => {
-    socket.on(`/api/v1/threads/${activeChatRoom?.id}/messages`, (updatedMessages: Message[]) => {
-      setMessages(updatedMessages);
-    });
-  }, [])
+    socket.on(
+      `/api/v1/threads/${activeChatRoom?.id}/messages`,
+      (updatedMessages: Message[]) => {
+        setMessages(updatedMessages);
+      }
+    );
+  }, []);
 
   useEffect(() => {
     // const myAbortController = new AbortController();
@@ -80,15 +83,16 @@ const ChatRoom = (props: ChatRoomProps) => {
 
     fetchMessagesHandler();
   }, [activeChatRoom]);
-    
+
   return (
     <div className="text-center">
-      {activeChatRoom && 
+      {activeChatRoom && (
         <Card className="chat-room-container">
           <Card.Header>
             <h3 className="display-5 text-center">
-              Chat with {activeChatRoom.participants.map((participant, index) => {
-                let result: string = '';
+              Chat with{" "}
+              {activeChatRoom.participants.map((participant, index) => {
+                let result: string = "";
                 if (index !== activeChatRoom.participants.length - 1) {
                   result = `${participant.username}, `;
                 } else {
@@ -99,12 +103,15 @@ const ChatRoom = (props: ChatRoomProps) => {
             </h3>
           </Card.Header>
           <Card.Body>
-            {!isLoading && 
+            {!isLoading && (
               <div>
-                {messages.map(message => {
+                {messages.map((message) => {
                   if (message.from !== currentUser.id) {
                     return (
-                      <div key={message.seq} className="d-flex justify-content-start mb-4">
+                      <div
+                        key={message.seq}
+                        className="d-flex justify-content-start mb-4"
+                      >
                         <div className="msg_container">
                           <p>{message.from}</p>
                           <p>{message.content}</p>
@@ -114,7 +121,10 @@ const ChatRoom = (props: ChatRoomProps) => {
                     );
                   }
                   return (
-                    <div key={message.seq} className="d-flex justify-content-end mb-4">
+                    <div
+                      key={message.seq}
+                      className="d-flex justify-content-end mb-4"
+                    >
                       <div className="msg_container_send">
                         <p>{message.from}</p>
                         <p>{message.content}</p>
@@ -124,15 +134,14 @@ const ChatRoom = (props: ChatRoomProps) => {
                   );
                 })}
               </div>
-            }
+            )}
             {isLoading && <p>Loading Messages...</p>}
           </Card.Body>
         </Card>
-      }
-      {!activeChatRoom && 
+      )}
+      {!activeChatRoom && (
         <h3 className="no-chat-selected">No Chat Room Selected</h3>
-      }
-      
+      )}
     </div>
   );
 };
