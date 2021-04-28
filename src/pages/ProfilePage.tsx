@@ -40,7 +40,7 @@ const ProfilePage = () => {
             .then((json) => {
               console.log(json);
               setIsLoading(false);
-            //   setProfileInfo(json);
+              setProfileInfo(json);
             }).catch((err) => {
               console.log(err);
               setIsLoading(false);
