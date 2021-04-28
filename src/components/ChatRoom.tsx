@@ -1,76 +1,139 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
+import { Message } from '../models/message.model';
+import { Thread } from '../models/thread.model';
+import { Friend } from '../models/friend.model';
 
 import "../styles/ChatRoom.css";
 
-const ChatRoom = () => {
-  console.log();
+const allMessages: Message[] = [
+  new Message(
+    "f48c1eca-295d-4603-8433-bbfa647653",
+    0,
+    "2017-07-21T17:32:28Z",
+    "f48c1eca-295d-4603-8433-bbfa641234",
+    "Hey Jerry, how are you doing?"
+  ),
+  new Message(
+    "f48c1eca-295d-4603-8433-bbfa641245",
+    1,
+    "2017-07-22T17:32:28Z",
+    "f48c1eca-295d-4603-8433-bbfa645678",
+    "Hey Mike! I'm good, how are you doing?"
+  ),
+  new Message(
+    "f48c1eca-295d-4603-8433-bbfa649876",
+    2,
+    "2017-07-23T17:32:28Z",
+    "f48c1eca-295d-4603-8433-bbfa641234",
+    "Great, wanna hangout?"
+  ),
+  new Message(
+    "f48c1eca-295d-4603-8433-bbfa641111",
+    3,
+    "2017-07-24T17:32:28Z",
+    "f48c1eca-295d-4603-8433-bbfa645678",
+    "Yup"
+  )
+];
 
-  /*
+interface ChatRoomProps {
+  activeChatRoom: Thread | null;
+  socket: any;
+  currentUser: Friend;
+}
+
+const ChatRoom = (props: ChatRoomProps) => {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const { activeChatRoom } = props;
+  const { socket } = props;
+  const { currentUser } = props;
   
-  const [yourID, setYourID] = useState();
-  const [messages, setMessages] = useState<{body: string, id: any}[]>([]);
-  const [message, setMessage] = useState("");
-
-  const socketRef = useRef(io());
+  useEffect(() => {
+    socket.on(`/api/v1/threads/${activeChatRoom?.id}/messages`, (updatedMessages: Message[]) => {
+      setMessages(updatedMessages);
+    });
+  }, [])
 
   useEffect(() => {
-  
-    // socketRef.current = io.connect('/');
-
-    socketRef.current.on("your id", id => {
-      setYourID(id);
-    })
-
-    socketRef.current.on("message", (msg: any) => {
-      console.log("here");
-      receivedMessage(msg);
-    })
-  }, []);
-
-    function receivedMessage(msg: any) {
-      setMessages(oldMsgs => [...oldMsgs, msg]);
+    // const myAbortController = new AbortController();
+    const fetchMessagesHandler = () => {
+      setIsLoading(true);
+      setTimeout(() => {
+        setIsLoading(false);
+        setMessages(allMessages);
+      }, 1000);
     }
+    // const fetchMessagesHandler = async () => {
+    //   setIsLoading(true);
+    //   const response = await fetch(
+    //     `https://cloud.lucasantarella.com/api/v1/threads/${activeChatRoom.id}/messages`,
+    //     {
+    //       signal: myAbortController.signal,
+    //     }
+    //   );
+    //   const data = await response.json();
+    //   setMessages(data);
+    //   setIsLoading(false);
+    // };
 
-    function sendMessage(e: any) {
-      e.preventDefault();
-      const messageObject = {
-        body: message,
-        id: yourID,
-      };
-      setMessage("");
-      socketRef.current.emit("send message", messageObject);
-      setMessages(oldMsgs => [...oldMsgs, messageObject]);
-    }
-
-    function handleChange(e: any) {
-      setMessage(e.target.value);
-    }
+    fetchMessagesHandler();
+  }, [activeChatRoom]);
     
-    */
-
   return (
-    <Card className="chat-room-container">
-      <Card.Header>
-        <h3 className="display-5 text-center">
-          Chat with Mike123 and Jerry123
-        </h3>
-      </Card.Header>
-      <Card.Body>
-        <div className="d-flex justify-content-start mb-4">
-          <div className="msg_container">
-            Hi, how are you Mike?
-            <span className="msg_time">8:40 AM, Today</span>
-          </div>
-        </div>
-        <div className="d-flex justify-content-end mb-4">
-          <div className="msg_container_send">
-            Hi Jerry I am good thanks. how about you?
-            <span className="msg_time_send">8:55 AM, Today</span>
-          </div>
-        </div>
-      </Card.Body>
-    </Card>
+    <div className="text-center">
+      {activeChatRoom && 
+        <Card className="chat-room-container">
+          <Card.Header>
+            <h3 className="display-5 text-center">
+              Chat with {activeChatRoom.participants.map((participant, index) => {
+                let result: string = '';
+                if (index !== activeChatRoom.participants.length - 1) {
+                  result = `${participant.username}, `;
+                } else {
+                  result = `and ${participant.username}`;
+                }
+                return result;
+              })}
+            </h3>
+          </Card.Header>
+          <Card.Body>
+            {!isLoading && 
+              <div>
+                {messages.map(message => {
+                  if (message.from !== currentUser.id) {
+                    return (
+                      <div key={message.seq} className="d-flex justify-content-start mb-4">
+                        <div className="msg_container">
+                          <p>{message.from}</p>
+                          <p>{message.content}</p>
+                          <span className="msg_time">{message.timestamp}</span>
+                        </div>
+                      </div>
+                    );
+                  }
+                  return (
+                    <div key={message.seq} className="d-flex justify-content-end mb-4">
+                      <div className="msg_container_send">
+                        <p>{message.from}</p>
+                        <p>{message.content}</p>
+                        <span className="msg_time">{message.timestamp}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            }
+            {isLoading && <p>Loading Messages...</p>}
+          </Card.Body>
+        </Card>
+      }
+      {!activeChatRoom && 
+        <h3 className="no-chat-selected">No Chat Room Selected</h3>
+      }
+      
+    </div>
   );
 };
 
