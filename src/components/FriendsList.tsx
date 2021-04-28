@@ -22,11 +22,11 @@ const FriendsList = (props: FriendsListProps) => {
 
   const onAddFriend = async (username: any) => {
     const response = await fetch(
-      "https://cloud.lucasantarella.com/api/v1/friends",
+      "https://cs490.lucasantarella.com/api/v1/friends",
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ username: username.current.value }),
       }
@@ -52,7 +52,7 @@ const FriendsList = (props: FriendsListProps) => {
     const fetchFriendsHandler = async () => {
       setIsLoading(true);
       const response = await fetch(
-        "https://cloud.lucasantarella.com/api/v1/friends",
+        "https://cs490.lucasantarella.com/api/v1/friends",
         {
           signal: myAbortController.signal,
         }
@@ -66,7 +66,7 @@ const FriendsList = (props: FriendsListProps) => {
       fetchFriendsHandler();
       hasFetchedData.current = true;
     }
-    socket.on('/api/v1/status', () => {
+    socket.on("/api/v1/status", () => {
       // Presumably get back id of updated friend and request that new friend and update in friends state
     });
 
@@ -77,7 +77,7 @@ const FriendsList = (props: FriendsListProps) => {
 
   return (
     <div>
-      <StatusSwitch socket={socket}/>
+      <StatusSwitch socket={socket} />
       <FriendsToolbar clickHandler={onAddFriend} />
       <div className="heading my-3">Friends List:</div>
       {!isLoading && (

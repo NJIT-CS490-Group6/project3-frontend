@@ -1,6 +1,6 @@
 import ListGroup from "react-bootstrap/ListGroup";
 import React, { useState, useEffect, useRef } from "react";
-import { Thread } from '../models/thread.model';
+import { Thread } from "../models/thread.model";
 
 import "../styles/ChatRoomList.css";
 
@@ -23,9 +23,12 @@ const ChatRoomList = (props: ChatRoomListProps) => {
     const myAbortController = new AbortController();
     const fetchThreadsHandler = async () => {
       setIsLoading(true);
-      const response = await fetch("https://cloud.lucasantarella.com/api/v1/threads", {
-        signal: myAbortController.signal,
-      });
+      const response = await fetch(
+        "https://cs490.lucasantarella.com/api/v1/threads",
+        {
+          signal: myAbortController.signal,
+        }
+      );
       const data = await response.json();
 
       setThreads(data);
@@ -56,9 +59,7 @@ const ChatRoomList = (props: ChatRoomListProps) => {
                 variant="info"
               >
                 <span className="particpants">
-                    {thread.participants.map((user) => (
-                        `${user.username}, `
-                    ))}
+                  {thread.participants.map((user) => `${user.username}, `)}
                 </span>
                 <br />
                 <span className="last-message">

@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 
-import { Thread } from '../models/thread.model';
+import { Thread } from "../models/thread.model";
 
 interface MessageSenderProps {
   socket: any;
@@ -20,9 +20,11 @@ const MessageSender = (props: MessageSenderProps) => {
     const content = messageInput.current.value;
     if (content) {
       messageInput.current.value = null;
-      socket.emit(`/api/v1/threads/${activeChatRoom?.id}/messages`, { content });
+      socket.emit(`/api/v1/threads/${activeChatRoom?.id}/messages`, {
+        content,
+      });
     }
-  }
+  };
 
   return (
     <InputGroup className="my-2">
@@ -33,7 +35,9 @@ const MessageSender = (props: MessageSenderProps) => {
         aria-describedby="basic-addon2"
       />
       <InputGroup.Append>
-        <Button variant="outline-secondary" onClick={onSendMessage}>Send</Button>
+        <Button variant="outline-secondary" onClick={onSendMessage}>
+          Send
+        </Button>
       </InputGroup.Append>
     </InputGroup>
   );

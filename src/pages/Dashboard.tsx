@@ -8,8 +8,8 @@ import FriendsList from "../components/FriendsList";
 import ChatRoom from "../components/ChatRoom";
 import ChatRoomList from "../components/ChatRoomList";
 import MessageSender from "../components/MessageSender";
-import { Thread } from '../models/thread.model';
-import { Friend } from '../models/friend.model';
+import { Thread } from "../models/thread.model";
+import { Friend } from "../models/friend.model";
 import "../styles/Dashboard.css";
 
 interface DashboardProps {
@@ -24,23 +24,28 @@ const Dashboard = (props: DashboardProps) => {
 
   const onSelectChatRoom = (thread: Thread) => {
     setActiveChatRoom(thread);
-  }
-
+  };
 
   return (
     <Container fluid>
       <Row>
         <Col xs={6} md={5} lg={4} xl={3}>
-          <FriendsList socket={socket}/>
+          <FriendsList socket={socket} />
           <ChatRoomList onSelectChatRoom={onSelectChatRoom} />
         </Col>
         <Col xs={6} md={7} lg={8} xl={9}>
-          <ChatRoom socket={socket} activeChatRoom={activeChatRoom} currentUser={currentUser} />
-          {activeChatRoom && <MessageSender activeChatRoom={activeChatRoom} socket={socket}/>}
+          <ChatRoom
+            socket={socket}
+            activeChatRoom={activeChatRoom}
+            currentUser={currentUser}
+          />
+          {activeChatRoom && (
+            <MessageSender activeChatRoom={activeChatRoom} socket={socket} />
+          )}
         </Col>
       </Row>
     </Container>
   );
-}
+};
 
 export default Dashboard;
