@@ -50,6 +50,8 @@ const ChatRoom = (props: ChatRoomProps) => {
   const { socket } = props;
   const { currentUser } = props;
 
+  console.log(activeChatRoom?.participants);
+
   useEffect(() => {
     socket.on(
       `/api/v1/threads/${activeChatRoom?.id}/messages`,
