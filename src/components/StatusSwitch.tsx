@@ -10,7 +10,7 @@ const StatusSwitch = (props: StatusSwitchProps) => {
   const { socket } = props;
 
   const updateAvailability = () => {
-    const checked = availabilityInput.current.check;
+    const checked = availabilityInput?.current.checked;
     const status = checked ? 2 : 1;
     fetch(`https://cs490.lucasantarella.com/api/v1/me/status`, {
       body: JSON.stringify({ status }),
