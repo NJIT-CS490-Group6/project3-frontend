@@ -1,4 +1,3 @@
-import { Socket } from 'dgram';
 import React, { useRef } from "react";
 import Form from "react-bootstrap/Form";
 
@@ -11,8 +10,8 @@ const StatusSwitch = (props: StatusSwitchProps) => {
   const { socket } = props;
 
   const updateAvailability = () => {
-    console.log(availabilityInput.current);
-    let status = availabilityInput.current.value;
+    console.dir(availabilityInput.current);
+    let status = availabilityInput.current.check;
     status = status === 1 ? 2 : 1;
     fetch(`https://cs490.lucasantarella.com/api/v1/me/status`, {
       body: JSON.stringify({ status }),
