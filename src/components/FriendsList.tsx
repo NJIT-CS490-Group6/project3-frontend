@@ -38,13 +38,13 @@ const FriendsList = (props: FriendsListProps) => {
     });
   };
 
-  const getVariant: any = (status: string) => {
+  const getVariant: any = (status: number) => {
     let result = "";
-    if (status === '2') {
+    if (status === 2) {
       result = "success";
-    } else if (status === '1') {
+    } else if (status === 1) {
       result = "danger";
-    } else if (status === '0') {
+    } else if (status === 0) {
       result = "dark";
     }
     return result;
