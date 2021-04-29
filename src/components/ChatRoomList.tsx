@@ -93,6 +93,7 @@ const ChatRoomList = (props: ChatRoomListProps) => {
       <hr/>
       <InputGroup className="mb-3">
         <Form.Label>To create a chatroom, enter the names of the particpants seperated by a space</Form.Label> 
+        <br />
         <FormControl
           ref={participantsInput}
           placeholder="Participants"

@@ -11,7 +11,7 @@ const emptyFriendObject = new Friend(
     "",
     "",
     {
-    status: "",
+    status: 0,
     timestamp: ""
     }
 );

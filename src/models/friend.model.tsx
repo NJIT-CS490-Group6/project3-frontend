@@ -1,5 +1,5 @@
 interface Status {
-  status: string;
+  status: number;
   timestamp: string;
 }
 
