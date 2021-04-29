@@ -9,12 +9,12 @@ import ChatRoom from "../components/ChatRoom";
 import ChatRoomList from "../components/ChatRoomList";
 import MessageSender from "../components/MessageSender";
 import { Thread } from '../models/thread.model';
-import { Friend } from '../models/friend.model';
+import { User } from '../models/user.model';
 import "../styles/Dashboard.css";
 
 interface DashboardProps {
   socket: any;
-  currentUser: Friend;
+  currentUser: User;
 }
 
 const Dashboard = (props: DashboardProps) => {

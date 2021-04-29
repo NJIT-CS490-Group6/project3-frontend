@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import { Message } from '../models/message.model';
 import { Thread } from '../models/thread.model';
-import { Friend } from '../models/friend.model';
+import { User } from '../models/user.model';
 
 import "../styles/ChatRoom.css";
 
 interface ChatRoomProps {
   activeChatRoom: Thread | null;
   socket: any;
-  currentUser: Friend;
+  currentUser: User;
 }
 
 const ChatRoom = (props: ChatRoomProps) => {
@@ -84,7 +84,7 @@ const ChatRoom = (props: ChatRoomProps) => {
             {!isLoading && 
               <div>
                 {messages.map(message => {
-                  if (message.from !== currentUser.id) {
+                  if (message.from !== currentUser.uid) {
                     return (
                       <div key={message.seq} className="d-flex justify-content-start mb-4">
                         <div className="msg_container">
