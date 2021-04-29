@@ -11,8 +11,23 @@ const StatusSwitch = (props: StatusSwitchProps) => {
   const { socket } = props;
 
   const updateAvailability = () => {
-    // emit update status event that passes user id and updated status
-    // socket.emit('update status', )
+    console.log(availabilityInput.current);
+    let status = availabilityInput.current.value;
+    status = status === 1 ? 2 : 1;
+    fetch(`https://cs490.lucasantarella.com/api/v1/me/status`, {
+      body: JSON.stringify({ status }),
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: 'include'
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+      }).catch((err) => {
+        console.log(err);
+    });
   };
 
   return (

@@ -31,15 +31,15 @@ function App() {
   if (!token || !currentUser) {
     return (
       <div className="App">
-      <Switch>
-        <Route exact path="/">
-          <LandingPage />
-        </Route>
-        <Route path="**">
-          <ErrorPage />
-        </Route>
-      </Switch>
-    </div>
+        <Switch>
+          <Route exact path="/">
+            <LandingPage />
+          </Route>
+          <Route path="**">
+            <ErrorPage />
+          </Route>
+        </Switch>
+      </div>
     );
   }
 
