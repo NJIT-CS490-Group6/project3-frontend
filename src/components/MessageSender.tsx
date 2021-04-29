@@ -5,15 +5,18 @@ import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 
 import { Thread } from '../models/thread.model';
+import { Message } from '../models/message.model';
 
 interface MessageSenderProps {
   socket: any;
   activeChatRoom: Thread | null;
+  newMessage: (myMessage: Message) => void;
 }
 
 const MessageSender = (props: MessageSenderProps) => {
   const messageInput = useRef<any>(null);
   const { socket } = props;
+  const { newMessage } = props;
   const { activeChatRoom } = props;
 
   const onSendMessage = () => {
@@ -31,6 +34,7 @@ const MessageSender = (props: MessageSenderProps) => {
         .then((response) => response.json())
         .then((json) => {
           console.log(json);
+          newMessage(json);
         }).catch((err) => {
           console.log(err);
       });

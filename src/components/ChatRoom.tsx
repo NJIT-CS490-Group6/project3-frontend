@@ -10,6 +10,7 @@ interface ChatRoomProps {
   activeChatRoom: Thread | null;
   socket: any;
   currentUser: User;
+  myMessage: Message | null;
 }
 
 const ChatRoom = (props: ChatRoomProps) => {
@@ -18,6 +19,7 @@ const ChatRoom = (props: ChatRoomProps) => {
   const { activeChatRoom } = props;
   const { socket } = props;
   const { currentUser } = props;
+  const { myMessage } = props;
 
   const messageSenderName: any = (userID: string) => {
     let result = "test";
@@ -36,6 +38,12 @@ const ChatRoom = (props: ChatRoomProps) => {
       setMessages(updatedMessages);
     });
   }, [])
+
+  useEffect(() => {
+    if (myMessage) {
+      setMessages([...messages, myMessage]);
+    }
+  }, [myMessage])
 
   useEffect(() => {
     const myAbortController = new AbortController();

@@ -12,6 +12,7 @@ import "../styles/FriendsList.css";
 
 interface FriendsListProps {
   socket: any;
+  getFriends: (friendsList: Friend[]) => void;
 }
 
 const FriendsList = (props: FriendsListProps) => {
@@ -19,6 +20,7 @@ const FriendsList = (props: FriendsListProps) => {
   const [friends, setFriends] = useState<Friend[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { socket } = props;
+  const { getFriends } = props;
 
   const onAddFriend = (username: any) => {
     fetch("https://cs490.lucasantarella.com/api/v1/friends", {
@@ -64,6 +66,7 @@ const FriendsList = (props: FriendsListProps) => {
           console.log(json);
           setIsLoading(false);
           setFriends(json);
+          getFriends(json);
         }).catch((err) => {
           console.log(err);
           setIsLoading(false);

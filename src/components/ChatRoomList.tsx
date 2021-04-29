@@ -6,12 +6,13 @@ import Form from 'react-bootstrap/Form';
 import React, { useState, useEffect, useRef } from "react";
 import { Thread } from '../models/thread.model';
 import { Friend } from '../models/friend.model';
+import { Message } from '../models/message.model';
 
 import "../styles/ChatRoomList.css";
 
 interface ChatRoomListProps {
   onSelectChatRoom: (thread: Thread) => void;
-  // friends: Friend[];
+  friends: Friend[];
 }
 
 const ChatRoomList = (props: ChatRoomListProps) => {
@@ -20,16 +21,16 @@ const ChatRoomList = (props: ChatRoomListProps) => {
   const [threads, setThreads] = useState<Thread[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   
-
   const { onSelectChatRoom } = props;
+  const { friends } = props;
 
   const onClickThread = (thread: Thread) => {
     onSelectChatRoom(thread);
   };
 
-  // const mapUsernameToID = (participants) => {
-
-  // }
+  const mapUsernameToID = (participants: string[]) => {
+    console.log(friends, participants);
+  }
 
   const onCreateChatroom = () => {
     const participantsString = participantsInput?.current.value;
