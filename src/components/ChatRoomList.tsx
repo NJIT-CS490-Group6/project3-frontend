@@ -6,13 +6,14 @@ import Form from 'react-bootstrap/Form';
 import React, { useState, useEffect, useRef } from "react";
 import { Thread } from '../models/thread.model';
 import { Friend } from '../models/friend.model';
-import { Message } from '../models/message.model';
+import { User } from '../models/user.model';
 
 import "../styles/ChatRoomList.css";
 
 interface ChatRoomListProps {
   onSelectChatRoom: (thread: Thread) => void;
   friends: Friend[];
+  currentUser: User;
 }
 
 const ChatRoomList = (props: ChatRoomListProps) => {
@@ -23,13 +24,14 @@ const ChatRoomList = (props: ChatRoomListProps) => {
   
   const { onSelectChatRoom } = props;
   const { friends } = props;
+  const { currentUser } = props;
 
   const onClickThread = (thread: Thread) => {
     onSelectChatRoom(thread);
   };
 
   const mapUsernameToID = (usernames: string[]) => {
-    const result = []
+    const result = [currentUser.uid]
     for (let i = 0; i < usernames.length; i += 1) {
       for (let j = 0; i < friends.length; i += 1) {
         if (friends[j].username === usernames[i]) {
@@ -58,11 +60,9 @@ const ChatRoomList = (props: ChatRoomListProps) => {
         .then((response) => response.json())
         .then((json) => {
           console.log(json);
-          setIsLoading(false);
           setThreads([...threads, json]);
         }).catch((err) => {
           console.log(err);
-          setIsLoading(false);
       });
     }
   }
