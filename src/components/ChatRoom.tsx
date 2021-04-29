@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Card from "react-bootstrap/Card";
 import { Message } from '../models/message.model';
 import { Thread } from '../models/thread.model';
@@ -15,6 +15,7 @@ interface ChatRoomProps {
 const ChatRoom = (props: ChatRoomProps) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const hasFetchedData = useRef(false);
   const { activeChatRoom } = props;
   const { socket } = props;
   const { currentUser } = props;
@@ -32,9 +33,33 @@ const ChatRoom = (props: ChatRoomProps) => {
   };
   
   useEffect(() => {
-    socket.on(`/api/v1/threads/${activeChatRoom?.id}/messages`, (updatedMessages: Message[]) => {
-      setMessages(updatedMessages);
-    });
+    const myAbortController = new AbortController();
+    const fetchMessagesHandler = () => {
+      setIsLoading(true);
+      fetch(`https://cs490.lucasantarella.com/api/v1/threads/${activeChatRoom?.id}/messages`, {
+        method: 'GET',
+        credentials: 'include',
+        signal: myAbortController.signal
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          setIsLoading(false);
+          setMessages(json);
+        }).catch((err) => {
+          console.log(err);
+          setIsLoading(false);
+      });
+    };
+
+    if (!hasFetchedData.current) {
+      fetchMessagesHandler();
+      hasFetchedData.current = true;
+    }
+
+    return () => {
+      myAbortController.abort();
+    };
   }, [])
 
   useEffect(() => {
