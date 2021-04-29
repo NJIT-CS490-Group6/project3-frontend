@@ -28,8 +28,17 @@ const ChatRoomList = (props: ChatRoomListProps) => {
     onSelectChatRoom(thread);
   };
 
-  const mapUsernameToID = (participants: string[]) => {
-    console.log(friends, participants);
+  const mapUsernameToID = (usernames: string[]) => {
+    const result = []
+    for (let i = 0; i < usernames.length; i += 1) {
+      for (let j = 0; i < friends.length; i += 1) {
+        if (friends[j].username === usernames[i]) {
+          result.push(friends[j].id);
+          break;
+        }
+      }
+    }
+    return result;
   }
 
   const onCreateChatroom = () => {
