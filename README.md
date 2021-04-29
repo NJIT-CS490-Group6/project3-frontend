@@ -20,6 +20,7 @@ This code is purely frontend code used in creating the app.
 
 ### FOLLOWING ARE TEMPORARY DISABLED FOR TESTING PURPOSES:
 
+- @typescript-eslint/no-unused-vars
 - import/prefer-default-export
 - no-useless-constructor
 - no-unused-vars
