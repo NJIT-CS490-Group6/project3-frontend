@@ -36,7 +36,7 @@ const ChatRoomList = (props: ChatRoomListProps) => {
     const participantsString = participantsInput?.current.value;
     if (participantsString) {
       participantsInput.current.value = null;
-      const participants = participantsString.split(' ')
+      const participants = mapUsernameToID(participantsString.split(' '));
       setIsLoading(true);
       fetch("https://cs490.lucasantarella.com/api/v1/threads", {
         body: JSON.stringify({ participants }),
