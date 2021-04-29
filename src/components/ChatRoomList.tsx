@@ -31,7 +31,7 @@ const ChatRoomList = (props: ChatRoomListProps) => {
   const mapUsernameToID = (usernames: string[]) => {
     const result = [];
     for (let i = 0; i < usernames.length; i += 1) {
-      for (let j = 0; i < friends.length; j += 1) {
+      for (let j = 0; j < friends.length; j += 1) {
         console.log(`does ${friends[j].username} match ${usernames[i]}`);
         if (friends[j].username === usernames[i]) {
           console.log(`yes, pushing to result`);
