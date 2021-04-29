@@ -1,12 +1,12 @@
 .heading {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .chat-room-list-container {
-    white-space: nowrap;
-    overflow: hidden;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 #create-chatroom {
-    color: white;
+  color: white;
 }

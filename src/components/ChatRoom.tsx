@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
-import { Message } from '../models/message.model';
-import { Thread } from '../models/thread.model';
-import { User } from '../models/user.model';
+import { Message } from "../models/message.model";
+import { Thread } from "../models/thread.model";
+import { User } from "../models/user.model";
 
 import "../styles/ChatRoom.css";
 
@@ -23,62 +23,70 @@ const ChatRoom = (props: ChatRoomProps) => {
 
   const messageSenderName: any = (userID: string) => {
     let result = "test";
-    if( activeChatRoom != null){
-      for (let i=0; i < activeChatRoom.participants.length; i+=1){
-        if (activeChatRoom.participants[i].id === userID){
+    if (activeChatRoom != null) {
+      for (let i = 0; i < activeChatRoom.participants.length; i += 1) {
+        if (activeChatRoom.participants[i].id === userID) {
           result = activeChatRoom.participants[i].username;
         }
       }
     }
     return result;
   };
-  
+
   useEffect(() => {
-    socket.on(`/api/v1/threads/${activeChatRoom?.id}/messages`, (updatedMessages: Message[]) => {
-      setMessages(updatedMessages);
-    });
-  }, [])
+    socket.on(
+      `/api/v1/threads/${activeChatRoom?.id}/messages`,
+      (updatedMessages: Message[]) => {
+        setMessages(updatedMessages);
+      }
+    );
+  }, []);
 
   useEffect(() => {
     if (myMessage) {
       setMessages([...messages, myMessage]);
     }
-  }, [myMessage])
+  }, [myMessage]);
 
   useEffect(() => {
     const myAbortController = new AbortController();
     const fetchMessagesHandler = () => {
       if (activeChatRoom) {
         setIsLoading(true);
-        fetch(`https://cs490.lucasantarella.com/api/v1/threads/${activeChatRoom?.id}/messages`, {
-          method: 'GET',
-          credentials: 'include',
-          signal: myAbortController.signal
-        })
+        fetch(
+          `https://cs490.lucasantarella.com/api/v1/threads/${activeChatRoom?.id}/messages`,
+          {
+            method: "GET",
+            credentials: "include",
+            signal: myAbortController.signal,
+          }
+        )
           .then((response) => response.json())
           .then((json) => {
             console.log(json);
             setIsLoading(false);
             setMessages(json);
-          }).catch((err) => {
+          })
+          .catch((err) => {
             console.log(err);
             setIsLoading(false);
-        });
+          });
       }
       setIsLoading(false);
     };
 
     fetchMessagesHandler();
   }, [activeChatRoom]);
-    
+
   return (
     <div className="text-center">
-      {activeChatRoom && 
+      {activeChatRoom && (
         <Card className="chat-room-container">
           <Card.Header>
             <h3 className="display-5 text-center">
-              Chat with {activeChatRoom.participants.map((participant, index) => {
-                let result: string = '';
+              Chat with{" "}
+              {activeChatRoom.participants.map((participant, index) => {
+                let result: string = "";
                 if (index !== activeChatRoom.participants.length - 1) {
                   result = `${participant.username}, `;
                 } else {
@@ -89,12 +97,15 @@ const ChatRoom = (props: ChatRoomProps) => {
             </h3>
           </Card.Header>
           <Card.Body>
-            {!isLoading && 
+            {!isLoading && (
               <div>
-                {messages.map(message => {
+                {messages.map((message) => {
                   if (message.from !== currentUser.uid) {
                     return (
-                      <div key={message.seq} className="d-flex justify-content-start mb-4">
+                      <div
+                        key={message.seq}
+                        className="d-flex justify-content-start mb-4"
+                      >
                         <div className="msg_container">
                           <p>{messageSenderName(message.from)}</p>
                           <p>{message.content}</p>
@@ -104,7 +115,10 @@ const ChatRoom = (props: ChatRoomProps) => {
                     );
                   }
                   return (
-                    <div key={message.seq} className="d-flex justify-content-end mb-4">
+                    <div
+                      key={message.seq}
+                      className="d-flex justify-content-end mb-4"
+                    >
                       <div className="msg_container_send">
                         <p>{messageSenderName(message.from)}</p>
                         <p>{message.content}</p>
@@ -114,15 +128,14 @@ const ChatRoom = (props: ChatRoomProps) => {
                   );
                 })}
               </div>
-            }
+            )}
             {isLoading && <p>Loading Messages...</p>}
           </Card.Body>
         </Card>
-      }
-      {!activeChatRoom && 
+      )}
+      {!activeChatRoom && (
         <h3 className="no-chat-selected">No Chat Room Selected</h3>
-      }
-      
+      )}
     </div>
   );
 };

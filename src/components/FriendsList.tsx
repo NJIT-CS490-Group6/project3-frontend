@@ -1,6 +1,6 @@
 import ListGroup from "react-bootstrap/ListGroup";
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Dropdown from "react-bootstrap/Dropdown";
 
 import React, { useState, useEffect, useRef } from "react";
 
@@ -24,20 +24,21 @@ const FriendsList = (props: FriendsListProps) => {
 
   const onAddFriend = (username: any) => {
     fetch("https://cs490.lucasantarella.com/api/v1/friends", {
-      method: 'POST',
+      method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ username: username.current.value }),
-      credentials: 'include'
+      credentials: "include",
     })
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
         setFriends([...friends, json]);
-      }).catch((err) => {
+      })
+      .catch((err) => {
         console.log(err);
-    });
+      });
   };
 
   const getVariant: any = (status: number) => {
@@ -57,9 +58,9 @@ const FriendsList = (props: FriendsListProps) => {
     const fetchFriendsHandler = () => {
       setIsLoading(true);
       fetch("https://cs490.lucasantarella.com/api/v1/friends", {
-        method: 'GET',
-        credentials: 'include',
-        signal: myAbortController.signal
+        method: "GET",
+        credentials: "include",
+        signal: myAbortController.signal,
       })
         .then((response) => response.json())
         .then((json) => {
@@ -67,16 +68,17 @@ const FriendsList = (props: FriendsListProps) => {
           setIsLoading(false);
           setFriends(json);
           getFriends(json);
-        }).catch((err) => {
+        })
+        .catch((err) => {
           console.log(err);
           setIsLoading(false);
-      });
+        });
     };
     if (!hasFetchedData.current) {
       fetchFriendsHandler();
       hasFetchedData.current = true;
     }
-    socket.on('/api/v1/status', () => {
+    socket.on("/api/v1/status", () => {
       // Presumably get back id of updated friend and request that new friend and update in friends state
     });
     return () => {
@@ -86,7 +88,7 @@ const FriendsList = (props: FriendsListProps) => {
 
   return (
     <div>
-      <StatusSwitch socket={socket}/>
+      <StatusSwitch socket={socket} />
       <FriendsToolbar clickHandler={onAddFriend} />
       <div className="heading my-3">Friends List:</div>
       {!isLoading && (

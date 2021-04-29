@@ -1,12 +1,12 @@
 import ListGroup from "react-bootstrap/ListGroup";
-import Button from 'react-bootstrap/Button';
-import InputGroup from 'react-bootstrap/InputGroup';
-import FormControl from 'react-bootstrap/FormControl';
-import Form from 'react-bootstrap/Form';
+import Button from "react-bootstrap/Button";
+import InputGroup from "react-bootstrap/InputGroup";
+import FormControl from "react-bootstrap/FormControl";
+import Form from "react-bootstrap/Form";
 import React, { useState, useEffect, useRef } from "react";
-import { Thread } from '../models/thread.model';
-import { Friend } from '../models/friend.model';
-import { User } from '../models/user.model';
+import { Thread } from "../models/thread.model";
+import { Friend } from "../models/friend.model";
+import { User } from "../models/user.model";
 
 import "../styles/ChatRoomList.css";
 
@@ -20,7 +20,7 @@ const ChatRoomList = (props: ChatRoomListProps) => {
   const participantsInput = useRef<any>(null);
   const [threads, setThreads] = useState<Thread[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  
+
   const { onSelectChatRoom } = props;
   const { friends } = props;
 
@@ -42,53 +42,55 @@ const ChatRoomList = (props: ChatRoomListProps) => {
     }
     console.log(result);
     return result;
-  }
+  };
 
   const onCreateChatroom = () => {
     const participantsString = participantsInput?.current.value;
     if (participantsString) {
       participantsInput.current.value = null;
-      const participants = mapUsernameToID(participantsString.split(' '));
-      console.log('participants: ', participants);
+      const participants = mapUsernameToID(participantsString.split(" "));
+      console.log("participants: ", participants);
       setIsLoading(true);
       fetch("https://cs490.lucasantarella.com/api/v1/threads", {
         body: JSON.stringify({ participants }),
-        method: 'POST',
+        method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        credentials: 'include'
+        credentials: "include",
       })
         .then((response) => response.json())
         .then((json) => {
           console.log(json);
           setThreads([...threads, json]);
           setIsLoading(false);
-        }).catch((err) => {
+        })
+        .catch((err) => {
           console.log(err);
           setIsLoading(false);
-      });
+        });
     }
-  }
+  };
 
   useEffect(() => {
     const myAbortController = new AbortController();
     const fetchThreadsHandler = () => {
       setIsLoading(true);
       fetch("https://cs490.lucasantarella.com/api/v1/threads", {
-        method: 'GET',
-        credentials: 'include',
-        signal: myAbortController.signal
+        method: "GET",
+        credentials: "include",
+        signal: myAbortController.signal,
       })
         .then((response) => response.json())
         .then((json) => {
           console.log(json);
           setIsLoading(false);
           setThreads(json);
-        }).catch((err) => {
+        })
+        .catch((err) => {
           console.log(err);
           setIsLoading(false);
-      });
+        });
     };
 
     if (!hasFetchedData.current) {
@@ -103,9 +105,12 @@ const ChatRoomList = (props: ChatRoomListProps) => {
 
   return (
     <div>
-      <hr/>
+      <hr />
       <InputGroup className="mb-3">
-        <Form.Label>To create a chatroom, enter the names of the particpants seperated by a space</Form.Label> 
+        <Form.Label>
+          To create a chatroom, enter the names of the particpants seperated by
+          a space
+        </Form.Label>
         <br />
         <FormControl
           ref={participantsInput}
@@ -114,7 +119,9 @@ const ChatRoomList = (props: ChatRoomListProps) => {
           aria-describedby="basic-addon1"
         />
       </InputGroup>
-      <Button onClick={onCreateChatroom} variant="info mt-1">Create Chatroom</Button>
+      <Button onClick={onCreateChatroom} variant="info mt-1">
+        Create Chatroom
+      </Button>
       {!isLoading && (
         <div className="chat-room-list-container my-3">
           <div className="heading mb-3">Open chatrooms:</div>
@@ -127,9 +134,7 @@ const ChatRoomList = (props: ChatRoomListProps) => {
                 variant="info"
               >
                 <span className="particpants">
-                    {thread.participants.map((user) => (
-                        `${user.username}, `
-                    ))}
+                  {thread.participants.map((user) => `${user.username}, `)}
                 </span>
                 <br />
                 <span className="last-message">

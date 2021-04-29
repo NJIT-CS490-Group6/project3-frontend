@@ -15,7 +15,8 @@ This code is purely frontend code used in creating the app.
 - react/no-array-index-key is off for the same reasons we were told to turn it off in project 2
 - react-hooks/exhaustive-deps is off for the same reasons we were told to turn it off in project 2
 - react/jsx-filename-extension is off for the same reasons we were told to turn it off in project 2
-- import/nounresolved and import/extensions turned off because they directly conflict with a typescript error for not putting .tsx or .ts as at the end of imports
+- import/no-unresolved and import/extensions turned off because they directly conflict with a typescript error for not putting .tsx or .ts as at the end of imports
+- camelcase if turned off because the jwt-decode package cant be imported with camelcase, code cant be run without turning off this error
 
 ### FOLLOWING ARE TEMPORARY DISABLED FOR TESTING PURPOSES:
 

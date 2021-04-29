@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Form from "react-bootstrap/Form";
-import { Friend } from '../models/friend.model';
+import { Friend } from "../models/friend.model";
 
 interface StatusSwitchProps {
   socket: any;
@@ -16,40 +16,41 @@ const StatusSwitch = (props: StatusSwitchProps) => {
     const status = checked ? 2 : 1;
     fetch(`https://cs490.lucasantarella.com/api/v1/me/status`, {
       body: JSON.stringify({ status }),
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      credentials: 'include'
+      credentials: "include",
     })
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
-        setMyStatus(status)
-      }).catch((err) => {
+        setMyStatus(status);
+      })
+      .catch((err) => {
         console.log(err);
-    });
+      });
   };
 
   useEffect(() => {
     const getStatus = () => {
       fetch(`https://cs490.lucasantarella.com/api/v1/me`, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        credentials: 'include'
+        credentials: "include",
       })
         .then((response) => response.json())
         .then((json: Friend) => {
           setMyStatus(json.status.status);
-        }).catch((err) => {
+        })
+        .catch((err) => {
           console.log(err);
-      });
-    }
+        });
+    };
     getStatus();
   }, []);
-
 
   return (
     <Form>
@@ -63,6 +64,6 @@ const StatusSwitch = (props: StatusSwitchProps) => {
       />
     </Form>
   );
-}
+};
 
 export default StatusSwitch;
