@@ -10,9 +10,8 @@ const StatusSwitch = (props: StatusSwitchProps) => {
   const { socket } = props;
 
   const updateAvailability = () => {
-    console.dir(availabilityInput.current);
-    let status = availabilityInput.current.check;
-    status = status === 1 ? 2 : 1;
+    const checked = availabilityInput.current.check;
+    const status = checked ? 2 : 1;
     fetch(`https://cs490.lucasantarella.com/api/v1/me/status`, {
       body: JSON.stringify({ status }),
       method: 'PUT',
