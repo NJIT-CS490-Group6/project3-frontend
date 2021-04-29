@@ -40,11 +40,11 @@ const FriendsList = (props: FriendsListProps) => {
 
   const getVariant: any = (status: string) => {
     let result = "";
-    if (status === "available") {
+    if (status === '2') {
       result = "success";
-    } else if (status === "busy") {
+    } else if (status === '1') {
       result = "danger";
-    } else if (status === "offline") {
+    } else if (status === '0') {
       result = "dark";
     }
     return result;
