@@ -13,7 +13,6 @@ import "../styles/ChatRoomList.css";
 interface ChatRoomListProps {
   onSelectChatRoom: (thread: Thread) => void;
   friends: Friend[];
-  currentUser: User;
 }
 
 const ChatRoomList = (props: ChatRoomListProps) => {
@@ -24,15 +23,13 @@ const ChatRoomList = (props: ChatRoomListProps) => {
   
   const { onSelectChatRoom } = props;
   const { friends } = props;
-  const { currentUser } = props;
 
   const onClickThread = (thread: Thread) => {
     onSelectChatRoom(thread);
   };
 
   const mapUsernameToID = (usernames: string[]) => {
-    const result = [currentUser.uid];
-    console.log('username: ', usernames);
+    const result = [];
     for (let i = 0; i < usernames.length; i += 1) {
       for (let j = 0; i < friends.length; i += 1) {
         console.log(`does ${friends[j].username} match ${usernames[i]}`);

@@ -44,7 +44,7 @@ const Dashboard = (props: DashboardProps) => {
       <Row>
         <Col xs={6} md={5} lg={4} xl={3}>
           <FriendsList socket={socket} getFriends={getFriends}/>
-          <ChatRoomList onSelectChatRoom={onSelectChatRoom} friends={friends} currentUser={currentUser}/>
+          <ChatRoomList onSelectChatRoom={onSelectChatRoom} friends={friends}/>
         </Col>
         <Col xs={6} md={7} lg={8} xl={9}>
           <ChatRoom socket={socket} activeChatRoom={activeChatRoom} currentUser={currentUser} myMessage={myMessage}/>
