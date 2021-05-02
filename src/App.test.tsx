@@ -3,37 +3,51 @@ import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import App from "./App";
+import io from "socket.io-client";
+import { User } from "./models/user.model";
+import Dashboard from "./pages/Dashboard";
+import MainNavbar from "./components/MainNavbar";
 
-test("app rendering/navigating", () => {
-  const history = createMemoryHistory();
-  render(
-    <Router history={history}>
-      <App />
-    </Router>
-  );
-  // verify page content for expected route
-  // often you'd use a data-testid or role query, but this is also possible
-  expect(screen.getByText(/By Group 6/i)).toBeInTheDocument();
-
-  const leftClick = { button: 0 };
-  userEvent.click(screen.getByText(/Dashboard/i), leftClick);
-
-  // check that the content changed to the new page
-  expect(screen.getByText(/Available/i)).toBeInTheDocument();
+jest.mock("socket.io-client", () => {
+  const mSocket = {
+    on: jest.fn(),
+  };
+  return jest.fn(() => mSocket);
 });
 
-test("add a friend function rendered", () => {
+describe("Dashboard", () => {
   const history = createMemoryHistory();
-  render(
-    <Router history={history}>
-      <App />
-    </Router>
+  const currentUser = new User(
+    "aaaa",
+    "aaaaa",
+    "aaaaa",
+    123,
+    123,
+    "jj",
+    "jjjjj",
+    "hhh",
+    "JOHN TESTING"
   );
+  const ENDPOINT = "localhost:3000";
+  const mockSocket = io(ENDPOINT);
 
-  const leftClick = { button: 0 };
-  userEvent.click(screen.getByText(/Dashboard/i), leftClick);
+  beforeEach(() => {
+    jest.restoreAllMocks();
+    render(
+      <Router history={history}>
+        <MainNavbar currentUser={currentUser} />
+        <Dashboard socket={mockSocket} currentUser={currentUser} />
+      </Router>
+    );
+  });
 
-  // check that the content changed to the new page
-  expect(screen.getByText(/Add/i)).toBeInTheDocument();
+  test("check if navbar updated logged in user to currentUsers name (JOHN TESTING)", () => {
+    expect(screen.getByText(/JOHN TESTING/i)).toBeInTheDocument();
+  });
+
+  test("check if add a friend function rendered", () => {
+    expect(
+      screen.getByLabelText(/Enter Friend's Username/i)
+    ).toBeInTheDocument();
+  });
 });
