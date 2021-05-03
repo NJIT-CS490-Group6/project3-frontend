@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import { Message } from "../models/message.model";
 import { Thread } from "../models/thread.model";
 import { User } from "../models/user.model";
-//
+
 import "../styles/ChatRoom.css";
 
 interface ChatRoomProps {
