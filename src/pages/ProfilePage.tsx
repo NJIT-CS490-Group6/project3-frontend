@@ -1,6 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
+
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import InputGroup from "react-bootstrap/InputGroup";
+import FormControl from "react-bootstrap/FormControl";
+import Form from "react-bootstrap/Form";
+
 import { Friend } from "../models/friend.model";
+
+import '../styles/ProfilePage.css';
 
 interface ProfileRouteParams {
   id: string;
@@ -19,6 +29,18 @@ const ProfilePage = () => {
   const hasFetchedData = useRef(false);
   const [profileInfo, setProfileInfo] = useState<Friend>(emptyFriendObject);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const getVariant: any = (status: number) => {
+    let result = "";
+    if (status === 2) {
+      result = "success";
+    } else if (status === 1) {
+      result = "danger";
+    } else if (status === 0) {
+      result = "dark";
+    }
+    return result;
+  };
 
   useEffect(() => {
     const myAbortController = new AbortController();
@@ -52,15 +74,80 @@ const ProfilePage = () => {
   }, []);
 
   return (
-    <div>
+    <Container fluid>
       {!isLoading && (
         <div>
-          <h3>Username: {profileInfo.username}</h3>
-          <h3>Name: {profileInfo.name}</h3>
+          <Row>
+            <Col>
+              <InputGroup className="my-3">
+                <Form.Label>
+                  Username
+                </Form.Label>
+                <FormControl
+                  value={profileInfo.username}
+                />
+              </InputGroup>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <InputGroup className="my-3">
+                <Form.Label>
+                  Name
+                </Form.Label>
+                <FormControl
+                  value={profileInfo.name}
+                />
+              </InputGroup>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <InputGroup className="my-3">
+                <Form.Label>
+                  ID
+                </Form.Label>
+                <FormControl
+                  value={profileInfo.id}
+                />
+              </InputGroup>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <InputGroup className="my-3">
+                <Form.Label>
+                  Current Status
+                </Form.Label>
+                <FormControl
+                  className={`profile-${getVariant(profileInfo.status.status)}`}
+                  value={profileInfo.status.status}
+                />
+              </InputGroup>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <InputGroup className="my-3">
+                <Form.Label>
+                  Last time status changed
+                </Form.Label>
+                <FormControl
+                  value={profileInfo.status.timestamp}
+                />
+              </InputGroup>
+            </Col>
+          </Row>
         </div>
       )}
-      {isLoading && <p>Loading Profile...</p>}
-    </div>
+      {isLoading && (
+        <Row>
+          <Col>
+            <p>Loading Profile...</p>
+          </Col>
+        </Row>
+      )}
+    </Container>
   );
 };
 
