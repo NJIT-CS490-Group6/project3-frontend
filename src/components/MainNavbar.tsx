@@ -23,7 +23,7 @@ const MainNavbar = (props: MainNavbarProps) => {
       <Navbar.Collapse className="justify-content-end">
         <Navbar.Text>
           Signed in as:{" "}
-          <NavLink to="/profile/logged-in-user-id">{currentUser.un}</NavLink>
+          <NavLink to={`/profile/${currentUser.uid}`}>{currentUser.un}</NavLink>
         </Navbar.Text>
       </Navbar.Collapse>
     </Navbar>
