@@ -60,8 +60,6 @@
       "no-useless-constructor": "off",
       "no-unused-vars": "off",
       "no-empty-function": "off",
-      "no-alert": "off",
-      "no-console": "off",
       "@typescript-eslint/no-unused-vars": "off",
       "camelcase": "off"
     }

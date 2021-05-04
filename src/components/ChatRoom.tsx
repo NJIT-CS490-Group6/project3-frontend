@@ -63,12 +63,10 @@ const ChatRoom = (props: ChatRoomProps) => {
         )
           .then((response) => response.json())
           .then((json) => {
-            console.log(json);
             setIsLoading(false);
             setMessages(json);
           })
           .catch((err) => {
-            console.log(err);
             setIsLoading(false);
           });
       }

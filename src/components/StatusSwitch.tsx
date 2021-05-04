@@ -24,11 +24,9 @@ const StatusSwitch = (props: StatusSwitchProps) => {
     })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         setMyStatus(status);
       })
       .catch((err) => {
-        console.log(err);
       });
   };
 
@@ -46,7 +44,6 @@ const StatusSwitch = (props: StatusSwitchProps) => {
           setMyStatus(json.status.status);
         })
         .catch((err) => {
-          console.log(err);
         });
     };
     getStatus();

@@ -35,7 +35,6 @@ const Dashboard = (props: DashboardProps) => {
   };
 
   const newMessage = (myNewMessage: Message) => {
-    console.log(myMessage);
     setMyMessage(myNewMessage);
   };
 

@@ -32,15 +32,12 @@ const ChatRoomList = (props: ChatRoomListProps) => {
     const result = [];
     for (let i = 0; i < usernames.length; i += 1) {
       for (let j = 0; j < friends.length; j += 1) {
-        console.log(`does ${friends[j].username} match ${usernames[i]}`);
         if (friends[j].username === usernames[i]) {
-          console.log(`yes, pushing to result`);
           result.push(friends[j].id);
           break;
         }
       }
     }
-    console.log(result);
     return result;
   };
 
@@ -49,7 +46,6 @@ const ChatRoomList = (props: ChatRoomListProps) => {
     if (participantsString) {
       participantsInput.current.value = null;
       const participants = mapUsernameToID(participantsString.split(" "));
-      console.log("participants: ", participants);
       setIsLoading(true);
       fetch("https://cs490.lucasantarella.com/api/v1/threads", {
         body: JSON.stringify({ participants }),
@@ -61,12 +57,10 @@ const ChatRoomList = (props: ChatRoomListProps) => {
       })
         .then((response) => response.json())
         .then((json) => {
-          console.log(json);
           setThreads([...threads, json]);
           setIsLoading(false);
         })
         .catch((err) => {
-          console.log(err);
           setIsLoading(false);
         });
     }
@@ -83,12 +77,10 @@ const ChatRoomList = (props: ChatRoomListProps) => {
       })
         .then((response) => response.json())
         .then((json) => {
-          console.log(json);
           setIsLoading(false);
           setThreads(json);
         })
         .catch((err) => {
-          console.log(err);
           setIsLoading(false);
         });
     };

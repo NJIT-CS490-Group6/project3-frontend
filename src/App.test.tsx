@@ -2,7 +2,6 @@ import React from "react";
 import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import io from "socket.io-client";
 import { User } from "./models/user.model";
 import Dashboard from "./pages/Dashboard";

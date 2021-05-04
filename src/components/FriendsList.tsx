@@ -34,11 +34,9 @@ const FriendsList = (props: FriendsListProps) => {
     })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         setFriends([...friends, json]);
       })
       .catch((err) => {
-        console.log(err);
       });
   };
 
@@ -65,13 +63,11 @@ const FriendsList = (props: FriendsListProps) => {
       })
         .then((response) => response.json())
         .then((json) => {
-          console.log(json);
           setIsLoading(false);
           setFriends(json);
           getFriends(json);
         })
         .catch((err) => {
-          console.log(err);
           setIsLoading(false);
         });
     };

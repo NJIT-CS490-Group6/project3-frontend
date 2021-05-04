@@ -53,12 +53,10 @@ const ProfilePage = () => {
       })
         .then((response) => response.json())
         .then((json) => {
-          console.log(json);
           setIsLoading(false);
           setProfileInfo(json);
         })
         .catch((err) => {
-          console.log(err);
           setIsLoading(false);
         });
     };

@@ -36,11 +36,9 @@ const MessageSender = (props: MessageSenderProps) => {
       )
         .then((response) => response.json())
         .then((json) => {
-          console.log(json);
           newMessage(json);
         })
         .catch((err) => {
-          console.log(err);
         });
     }
   };
