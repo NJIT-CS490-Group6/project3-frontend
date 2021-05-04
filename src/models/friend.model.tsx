@@ -1,3 +1,5 @@
+/* eslint-disable import/prefer-default-export */
+
 interface Status {
   status: number;
   timestamp: string;
@@ -11,3 +13,5 @@ export class Friend {
     public status: Status
   ) {}
 }
+
+/* eslint-enable import/prefer-default-export */

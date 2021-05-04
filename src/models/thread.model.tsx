@@ -1,3 +1,5 @@
+/* eslint-disable import/prefer-default-export */
+
 import { Friend } from "./friend.model";
 
 export class Thread {
@@ -16,3 +18,5 @@ export class Thread {
     }
   ) {}
 }
+
+/* eslint-enable import/prefer-default-export */

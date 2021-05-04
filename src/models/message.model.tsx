@@ -1,3 +1,5 @@
+/* eslint-disable import/prefer-default-export */
+
 export class Message {
   constructor(
     public id: string,
@@ -7,3 +9,5 @@ export class Message {
     public content: string
   ) {}
 }
+
+/* eslint-enable import/prefer-default-export */

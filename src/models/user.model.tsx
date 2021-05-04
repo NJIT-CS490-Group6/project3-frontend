@@ -1,3 +1,5 @@
+/* eslint-disable import/prefer-default-export */
+
 export class User {
   constructor(
     public iss: string,
@@ -11,3 +13,5 @@ export class User {
     public un: string
   ) {}
 }
+
+/* eslint-enable import/prefer-default-export */
