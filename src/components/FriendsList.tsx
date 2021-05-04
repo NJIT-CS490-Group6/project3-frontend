@@ -3,7 +3,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 import { Friend } from "../models/friend.model";
 import FriendsToolbar from "./FriendsToolbar";
@@ -36,8 +36,7 @@ const FriendsList = (props: FriendsListProps) => {
       .then((json) => {
         setFriends([...friends, json]);
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   };
 
   const getVariant: any = (status: number) => {
@@ -104,7 +103,9 @@ const FriendsList = (props: FriendsListProps) => {
                 variant={getVariant(friend.status.status)}
                 title=""
               >
-                <Dropdown.Item eventKey="1"><Link to={`/profile/${friend.id}`}>Profile</Link></Dropdown.Item>
+                <Dropdown.Item eventKey="1">
+                  <Link to={`/profile/${friend.id}`}>Profile</Link>
+                </Dropdown.Item>
                 <Dropdown.Item eventKey="2">Remove Friend</Dropdown.Item>
               </DropdownButton>
             </ListGroup.Item>

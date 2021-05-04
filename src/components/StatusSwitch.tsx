@@ -28,8 +28,7 @@ const StatusSwitch = (props: StatusSwitchProps) => {
       .then((json) => {
         setMyStatus(status);
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   };
 
   useEffect(() => {
@@ -45,8 +44,7 @@ const StatusSwitch = (props: StatusSwitchProps) => {
         .then((json: Friend) => {
           setMyStatus(json.status.status);
         })
-        .catch((err) => {
-        });
+        .catch((err) => {});
     };
     getStatus();
   }, []);

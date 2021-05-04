@@ -10,7 +10,7 @@ import Form from "react-bootstrap/Form";
 
 import { Friend } from "../models/friend.model";
 
-import '../styles/ProfilePage.css';
+import "../styles/ProfilePage.css";
 
 interface ProfileRouteParams {
   id: string;
@@ -78,45 +78,31 @@ const ProfilePage = () => {
           <Row>
             <Col>
               <InputGroup className="my-3">
-                <Form.Label>
-                  Username
-                </Form.Label>
-                <FormControl
-                  value={profileInfo.username}
-                />
+                <Form.Label>Username</Form.Label>
+                <FormControl value={profileInfo.username} />
               </InputGroup>
             </Col>
           </Row>
           <Row>
             <Col>
               <InputGroup className="my-3">
-                <Form.Label>
-                  Name
-                </Form.Label>
-                <FormControl
-                  value={profileInfo.name}
-                />
+                <Form.Label>Name</Form.Label>
+                <FormControl value={profileInfo.name} />
               </InputGroup>
             </Col>
           </Row>
           <Row>
             <Col>
               <InputGroup className="my-3">
-                <Form.Label>
-                  ID
-                </Form.Label>
-                <FormControl
-                  value={profileInfo.id}
-                />
+                <Form.Label>ID</Form.Label>
+                <FormControl value={profileInfo.id} />
               </InputGroup>
             </Col>
           </Row>
           <Row>
             <Col>
               <InputGroup className="my-3">
-                <Form.Label>
-                  Current Status
-                </Form.Label>
+                <Form.Label>Current Status</Form.Label>
                 <FormControl
                   className={`profile-${getVariant(profileInfo.status.status)}`}
                   value={profileInfo.status.status}
@@ -127,12 +113,8 @@ const ProfilePage = () => {
           <Row>
             <Col>
               <InputGroup className="my-3">
-                <Form.Label>
-                  Last time status changed
-                </Form.Label>
-                <FormControl
-                  value={profileInfo.status.timestamp}
-                />
+                <Form.Label>Last time status changed</Form.Label>
+                <FormControl value={profileInfo.status.timestamp} />
               </InputGroup>
             </Col>
           </Row>

@@ -40,8 +40,7 @@ const MessageSender = (props: MessageSenderProps) => {
         .then((json) => {
           newMessage(json);
         })
-        .catch((err) => {
-        });
+        .catch((err) => {});
     }
   };
 
