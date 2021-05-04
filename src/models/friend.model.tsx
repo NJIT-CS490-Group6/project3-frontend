@@ -1,4 +1,4 @@
-/* eslint-disable import/prefer-default-export */
+/* eslint-disable import/prefer-default-export, no-useless-constructor */
 
 interface Status {
   status: number;
@@ -14,4 +14,4 @@ export class Friend {
   ) {}
 }
 
-/* eslint-enable import/prefer-default-export */
+/* eslint-enable import/prefer-default-export, no-useless-constructor */

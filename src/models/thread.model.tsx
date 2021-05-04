@@ -1,4 +1,4 @@
-/* eslint-disable import/prefer-default-export */
+/* eslint-disable import/prefer-default-export, no-useless-constructor */
 
 import { Friend } from "./friend.model";
 
@@ -19,4 +19,4 @@ export class Thread {
   ) {}
 }
 
-/* eslint-enable import/prefer-default-export */
+/* eslint-enable import/prefer-default-export, no-useless-constructor */
