@@ -15,7 +15,9 @@ interface MessageSenderProps {
 
 const MessageSender = (props: MessageSenderProps) => {
   const messageInput = useRef<any>(null);
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   const { socket } = props;
+  /* eslint-enable @typescript-eslint/no-unused-vars */
   const { newMessage } = props;
   const { activeChatRoom } = props;
 

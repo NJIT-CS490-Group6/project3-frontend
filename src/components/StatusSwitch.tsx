@@ -9,7 +9,9 @@ interface StatusSwitchProps {
 const StatusSwitch = (props: StatusSwitchProps) => {
   const availabilityInput = useRef<any>(null);
   const [myStatus, setMyStatus] = useState<number | null>(null);
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   const { socket } = props;
+  /* eslint-enable @typescript-eslint/no-unused-vars */
 
   const updateAvailability = () => {
     const checked = availabilityInput?.current.checked;

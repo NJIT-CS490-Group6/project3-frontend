@@ -1,4 +1,4 @@
-/* eslint-disable import/prefer-default-export, no-useless-constructor, no-empty-function */
+/* eslint-disable import/prefer-default-export, no-useless-constructor, no-empty-function, no-unused-vars */
 
 export class User {
   constructor(
@@ -14,4 +14,4 @@ export class User {
   ) {}
 }
 
-/* eslint-enable import/prefer-default-export, no-useless-constructor, no-empty-function */
+/* eslint-enable import/prefer-default-export, no-useless-constructor, no-empty-function, no-unused-vars */

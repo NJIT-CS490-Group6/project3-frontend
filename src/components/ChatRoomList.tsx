@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 import React, { useState, useEffect, useRef } from "react";
 import { Thread } from "../models/thread.model";
 import { Friend } from "../models/friend.model";
-import { User } from "../models/user.model";
+// import { User } from "../models/user.model";
 
 import "../styles/ChatRoomList.css";
 
