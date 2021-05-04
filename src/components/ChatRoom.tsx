@@ -33,6 +33,18 @@ const ChatRoom = (props: ChatRoomProps) => {
     return result;
   };
 
+  const messageSendTime: any = (sendTime: string) => {
+    let newTime = "test";
+    const year = sendTime.slice(0, 4);
+    const month = sendTime.slice(5, 7);
+    const day = sendTime.slice(8, 10);
+    const hour = sendTime.slice(11, 13);
+    const minute = sendTime.slice(14, 16);
+    const timeZone = "UTC";
+    newTime = `${month}/${day}/${year} ${hour}:${minute} ${timeZone}`;
+    return newTime;
+  };
+
   useEffect(() => {
     socket.on(
       `/api/v1/threads/${activeChatRoom?.id}/messages`,
@@ -107,7 +119,9 @@ const ChatRoom = (props: ChatRoomProps) => {
                         <div className="msg_container">
                           <p>{messageSenderName(message.from)}</p>
                           <p>{message.content}</p>
-                          <span className="msg_time">{message.timestamp}</span>
+                          <span className="msg_time">
+                            {messageSendTime(message.timestamp)}
+                          </span>
                         </div>
                       </div>
                     );
@@ -120,7 +134,9 @@ const ChatRoom = (props: ChatRoomProps) => {
                       <div className="msg_container_send">
                         <p>{messageSenderName(message.from)}</p>
                         <p>{message.content}</p>
-                        <span className="msg_time">{message.timestamp}</span>
+                        <span className="msg_time">
+                          {messageSendTime(message.timestamp)}
+                        </span>
                       </div>
                     </div>
                   );
