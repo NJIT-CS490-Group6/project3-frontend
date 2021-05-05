@@ -27,8 +27,22 @@ const socketRef = useRef();
     setMessages(oldMsgs => [...oldMsgs, message]);
   }
 
+ function receivedMessage(message) {
+    setMessages(oldMsgs => [...oldMsgs, message]);
+  }
 
-*/
+  function sendMessage(e) {
+    e.preventDefault();
+    const messageObject = {
+      body: message,
+      id: yourID,
+    };
+    setMessage("");
+    socketRef.current.emit("send message", messageObject);
+  }
+ 
+ */
+
 
 const allMessages: Message[] = [
   new Message(
