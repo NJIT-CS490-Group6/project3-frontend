@@ -40,6 +40,10 @@ const socketRef = useRef();
     setMessage("");
     socketRef.current.emit("send message", messageObject);
   }
+  
+    function handleChange(e) {
+    setMessage(e.target.value);
+  }
  
  */
 
