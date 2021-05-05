@@ -6,47 +6,6 @@ import { Friend } from "../models/friend.model";
 
 import "../styles/ChatRoom.css";
 
-/*
-
-const socketRef = useRef();
-
-  useEffect(() => {
-    socketRef.current = io.connect('/');
-
-    socketRef.current.on("your id", id => {
-      setYourID(id);
-    })
-
-    socketRef.current.on("message", (message) => {
-      console.log("here");
-      receivedMessage(message);
-    })
-  }, []);
-
-  function receivedMessage(message) {
-    setMessages(oldMsgs => [...oldMsgs, message]);
-  }
-
- function receivedMessage(message) {
-    setMessages(oldMsgs => [...oldMsgs, message]);
-  }
-
-  function sendMessage(e) {
-    e.preventDefault();
-    const messageObject = {
-      body: message,
-      id: yourID,
-    };
-    setMessage("");
-    socketRef.current.emit("send message", messageObject);
-  }
-  
-    function handleChange(e) {
-    setMessage(e.target.value);
-  }
- 
- */
-
 
 const allMessages: Message[] = [
   new Message(
