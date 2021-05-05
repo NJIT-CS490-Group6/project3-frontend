@@ -6,6 +6,45 @@ import { Friend } from '../models/friend.model';
 
 import "../styles/ChatRoomList.css";
 
+/*
+
+useEffect(() => {
+    socketRef.current = io.connect('/');
+
+    socketRef.current.on("your id", id => {
+      setYourID(id);
+    })
+
+    socketRef.current.on("message", (message) => {
+      console.log("here");
+      receivedMessage(message);
+    })
+  }, []);
+
+  function receivedMessage(message) {
+    setMessages(oldMsgs => [...oldMsgs, message]);
+  }
+
+  function sendMessage(e) {
+    e.preventDefault();
+    const messageObject = {
+      body: message,
+      id: yourID,
+    };
+    setMessage("");
+    socketRef.current.emit("send message", messageObject);
+  }
+
+  function handleChange(e) {
+    setMessage(e.target.value);
+  }
+
+
+
+
+
+*/
+
 const thread1Friends: Friend[] = [
   new Friend(
     "f48c1eca-295d-4603-8433-bbfa645ce92a",
