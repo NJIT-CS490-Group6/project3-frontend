@@ -13,17 +13,16 @@ import { User } from "./models/user.model";
 
 import "./styles/App.css";
 
-const socket = io();
-
 function App() {
   const cookies = new Cookies();
-  const token = cookies.get("jwt");
-  const decoded: User = jwt_decode(token);
-
+  const token = cookies.get('jwt');
   const [currentUser, setCurrentUser] = useState<User>();
 
   useEffect(() => {
-    setCurrentUser(decoded);
+    if (token) {
+      const decoded: User = jwt_decode(token);
+      setCurrentUser(decoded);
+    }
   }, []);
 
   if (!token || !currentUser) {
@@ -31,10 +30,10 @@ function App() {
       <div className="App">
         <Switch>
           <Route exact path="/">
-            <LandingPage />
+            <LandingPage/>
           </Route>
           <Route path="**">
-            <ErrorPage />
+            <ErrorPage/>
           </Route>
         </Switch>
       </div>
@@ -45,18 +44,18 @@ function App() {
     <div className="App">
       <Switch>
         <Route exact path="/">
-          <Redirect to="/dashboard" />
+          <Redirect to="/dashboard"/>
         </Route>
         <Route path="/dashboard">
-          <MainNavbar currentUser={currentUser} />
-          <Dashboard socket={socket} currentUser={currentUser} />
+          <MainNavbar currentUser={currentUser}/>
+          <Dashboard currentUser={currentUser}/>
         </Route>
         <Route path="/profile/:id">
-          <MainNavbar currentUser={currentUser} />
-          <ProfilePage />
+          <MainNavbar currentUser={currentUser}/>
+          <ProfilePage/>
         </Route>
         <Route path="**">
-          <ErrorPage />
+          <ErrorPage/>
         </Route>
       </Switch>
     </div>

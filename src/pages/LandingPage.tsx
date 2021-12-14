@@ -10,11 +10,11 @@ import "../styles/LandingPage.css";
 
 const LandingPage = () => {
   const goToLogin = () => {
-    window.open("https://cs490.lucasantarella.com/login");
+    window.open("/login");
   };
 
   const goToRegistration = () => {
-    window.open("https://cs490.lucasantarella.com/register");
+    window.open("/register");
   };
 
   return (

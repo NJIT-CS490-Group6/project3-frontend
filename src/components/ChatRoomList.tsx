@@ -47,7 +47,7 @@ const ChatRoomList = (props: ChatRoomListProps) => {
       participantsInput.current.value = null;
       const participants = mapUsernameToID(participantsString.split(" "));
       setIsLoading(true);
-      fetch("https://cs490.lucasantarella.com/api/v1/threads", {
+      fetch("/api/v1/threads", {
         body: JSON.stringify({ participants }),
         method: "POST",
         headers: {
@@ -70,10 +70,10 @@ const ChatRoomList = (props: ChatRoomListProps) => {
     const myAbortController = new AbortController();
     const fetchThreadsHandler = () => {
       setIsLoading(true);
-      fetch("https://cs490.lucasantarella.com/api/v1/threads", {
-        method: "GET",
-        credentials: "include",
-        signal: myAbortController.signal,
+      fetch("/api/v1/threads", {
+        method: 'GET',
+        credentials: 'include',
+        signal: myAbortController.signal
       })
         .then((response) => response.json())
         .then((json) => {

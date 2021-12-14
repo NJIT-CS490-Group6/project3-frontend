@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
+import io from "socket.io-client";
 import FriendsList from "../components/FriendsList";
 import ChatRoom from "../components/ChatRoom";
 import ChatRoomList from "../components/ChatRoomList";
@@ -15,13 +16,13 @@ import { Message } from "../models/message.model";
 import "../styles/Dashboard.css";
 
 interface DashboardProps {
-  socket: any;
   currentUser: User;
 }
 
+const socket = io();
+
 const Dashboard = (props: DashboardProps) => {
-  const { socket } = props;
-  const { currentUser } = props;
+  const {currentUser} = props;
   const [activeChatRoom, setActiveChatRoom] = useState<Thread | null>(null);
   const [friends, setFriends] = useState<Friend[]>([]);
   const [myMessage, setMyMessage] = useState<Message | null>(null);

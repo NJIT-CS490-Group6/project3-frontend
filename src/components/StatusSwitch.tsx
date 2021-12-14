@@ -16,7 +16,7 @@ const StatusSwitch = (props: StatusSwitchProps) => {
   const updateAvailability = () => {
     const checked = availabilityInput?.current.checked;
     const status = checked ? 2 : 1;
-    fetch(`https://cs490.lucasantarella.com/api/v1/me/status`, {
+    fetch(`/api/v1/me/status`, {
       body: JSON.stringify({ status }),
       method: "PUT",
       headers: {
@@ -33,8 +33,8 @@ const StatusSwitch = (props: StatusSwitchProps) => {
 
   useEffect(() => {
     const getStatus = () => {
-      fetch(`https://cs490.lucasantarella.com/api/v1/me`, {
-        method: "GET",
+      fetch(`/api/v1/me`, {
+        method: 'GET',
         headers: {
           "Content-Type": "application/json",
         },

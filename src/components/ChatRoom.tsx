@@ -65,14 +65,11 @@ const ChatRoom = (props: ChatRoomProps) => {
     const fetchMessagesHandler = () => {
       if (activeChatRoom) {
         setIsLoading(true);
-        fetch(
-          `https://cs490.lucasantarella.com/api/v1/threads/${activeChatRoom?.id}/messages`,
-          {
-            method: "GET",
-            credentials: "include",
-            signal: myAbortController.signal,
-          }
-        )
+        fetch(`/api/v1/threads/${activeChatRoom?.id}/messages`, {
+          method: 'GET',
+          credentials: 'include',
+          signal: myAbortController.signal
+        })
           .then((response) => response.json())
           .then((json) => {
             setIsLoading(false);

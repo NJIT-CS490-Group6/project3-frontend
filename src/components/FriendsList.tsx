@@ -5,7 +5,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
-import { Friend } from "../models/friend.model";
+import {Friend} from "../models/friend.model";
 import FriendsToolbar from "./FriendsToolbar";
 import StatusSwitch from "./StatusSwitch";
 
@@ -20,12 +20,12 @@ const FriendsList = (props: FriendsListProps) => {
   const hasFetchedData = useRef(false);
   const [friends, setFriends] = useState<Friend[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { socket } = props;
-  const { getFriends } = props;
+  const {socket} = props;
+  const {getFriends} = props;
 
   const onAddFriend = (username: any) => {
-    fetch("https://cs490.lucasantarella.com/api/v1/friends", {
-      method: "POST",
+    fetch("/api/v1/friends", {
+      method: 'POST',
       headers: {
         "Content-Type": "application/json",
       },
@@ -115,15 +115,15 @@ const FriendsList = (props: FriendsListProps) => {
       {isLoading && <p>Loading Friends list...</p>}
       <div className="legend">
         <span>
-          <div id="available-square" />
+          <div id="available-square"/>
           Available
         </span>
         <span>
-          <div id="busy-square" />
+          <div id="busy-square"/>
           Busy
         </span>
         <span>
-          <div id="offline-square" />
+          <div id="offline-square"/>
           Offline
         </span>
       </div>

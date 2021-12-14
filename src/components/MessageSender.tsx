@@ -25,17 +25,14 @@ const MessageSender = (props: MessageSenderProps) => {
     const content = messageInput.current.value;
     if (content) {
       messageInput.current.value = null;
-      fetch(
-        `https://cs490.lucasantarella.com/api/v1/threads/${activeChatRoom?.id}/messages`,
-        {
-          body: JSON.stringify({ content }),
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        }
-      )
+      fetch(`/api/v1/threads/${activeChatRoom?.id}/messages`, {
+        body: JSON.stringify({ content }),
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: 'include'
+      })
         .then((response) => response.json())
         .then((json) => {
           newMessage(json);
